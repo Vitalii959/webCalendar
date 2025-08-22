@@ -1,0 +1,31 @@
+.checkbox {
+  background-color: transparent;
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: fit-content;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.checkbox-input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkbox-input:checked + .checkbox-checkmark {
+  color: var(--checkbox-color);
+}
+
+.checkbox-label {
+  background-color: transparent;
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: fit-content;
+  font-size: 1rem;
+  cursor: pointer;
+
+  column-gap: 0.3rem;
+}

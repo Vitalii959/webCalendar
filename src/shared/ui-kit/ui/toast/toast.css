@@ -1,0 +1,39 @@
+.toast {
+  display: flex;
+
+  opacity: 0;
+  visibility: hidden;
+
+  /* position: fixed;
+  top: 1rem;
+  right: 50%;
+  transform: translateX(50%); */
+  z-index: 999;
+
+  column-gap: 2rem;
+
+  background-color: var(--toast-background);
+
+  width: fit-content;
+  height: fit-content;
+
+  padding: 1rem 2rem;
+
+  border-radius: 10px 10px 0 0;
+
+  box-shadow: 0 1px 15px 0px var(--toast-dropshadow);
+
+  transition: opacity 0.2s ease;
+}
+.toast.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.btn-action {
+  height: fit-content;
+  cursor: pointer;
+}
+.toast__closeBtn {
+  cursor: pointer;
+}

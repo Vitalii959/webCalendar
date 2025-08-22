@@ -1,0 +1,14 @@
+.icons-box {
+  width: 100%;
+  height: 100%;
+}
+.icons-image {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+.icons-image svg {
+  transform: translateX(0);
+  width: 100%;
+  height: 100%;
+}

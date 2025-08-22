@@ -1,0 +1,1 @@
+export {DeleteConfirmationForm} from "./DeleteConfirmationForm";

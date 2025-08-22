@@ -1,0 +1,119 @@
+@import "tailwindcss";
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+  --dark-color: #13151d;
+  --light-color: #fff;
+  --green-default: #00ae1c;
+  --green-hover: #00ae1d9a;
+  --green-focus: #0cd52b;
+
+  --gray-default: #dedfe5;
+
+  --primary-default: var(--green-default);
+  --primary-hover: var(--green-hover);
+  --primary-focus: var(--green-focus);
+  --primary-icon: var(--light-color);
+
+  --link-default: var(--green-default);
+  --link-hover: var(--green-hover);
+
+  --input-error: #ff5620;
+  --input-background: transparent;
+  --input-placeholder: #979797;
+
+  --checkbox-color: var(--green-default);
+
+  --modal-background: #0000003d;
+
+  --select-picker-border: #dee0e5;
+
+  --dropdown-border: #dedfe5;
+
+  --calendar-today-background: var(--green-default);
+  --calendar-otherDays-color: #bfbfbf;
+}
+
+[data-theme="dark-theme"] {
+  background-color: var(--dark-color);
+  color: var(--light-color);
+  transition: all 0.5s ease;
+
+  --border-color: #dedfe5;
+  --secondary-background: transparent;
+  --secondary-hover: #464646;
+  --secondary-focus: #5c5c5c;
+
+  --input-text: var(--light-color);
+
+  --modal-border: #a6a6a678;
+
+  --select-underline: var(--light-color);
+  --select-border: var(--light-color);
+  --select-picker-background: #3f3838;
+  --select-picker-text: var(--light-color);
+
+  --text-area-underline: var(--light-color);
+  --text-area-text: var(--light-color);
+  --text-area-placeholder: #ffffff61;
+
+  --dropdown-arrow: var(--light-color);
+  --dropdown-option-text: var(--light-color);
+  --dropdown-option-background: #3b3b3b;
+  --dropdown-option-background-checked: #272727;
+  --dropdown-option-background-hover: #3a3838e3;
+
+  --calendar-cell-hover: #707070;
+
+  --toast-background: #4f4f4f;
+  --toast-text: black;
+  --toast-dropshadow: #00000010;
+}
+[data-theme="light-theme"] {
+  background-color: rgb(221, 221, 221);
+  color: var(--dark-color);
+  transition: all 0.5s ease;
+
+  --border-color: #dedfe5;
+  --secondary-default: transparent;
+  --secondary-hover: #efefef;
+  --secondary-focus: #e0e0e0;
+
+  --input-text: var(--dark-color);
+  --input-border: var(--gray-default);
+
+  --modal-border: var(--gray-default);
+
+  --select-underline: var(--dark-color);
+  --select-border: var(--dark-color);
+  --select-picker-background: var(--light-color);
+
+  --text-area-underline: var(--dark-color);
+  --text-area-placeholder: #767676;
+
+  --dropdown-arrow: var(--dark-color);
+  --dropdown-option-text: var(--dark-color);
+  --dropdown-option-background: var(--light-color);
+  --dropdown-option-background-checked: #e3e3e3;
+  --dropdown-option-background-hover: #efefef;
+
+  --calendar-cell-hover: #cfcfcf;
+
+  --toast-background: #f4f4f4;
+  --toast-text: black;
+  --toast-dropshadow: #00000027;
+}

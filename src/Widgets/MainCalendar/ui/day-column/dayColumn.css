@@ -1,0 +1,15 @@
+.calendarTaskCell {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.hourRow {
+  height: 60px;
+  border-bottom: 2px solid #d1d5db;
+}
+
+.quarterCell {
+  height: 15px;
+}

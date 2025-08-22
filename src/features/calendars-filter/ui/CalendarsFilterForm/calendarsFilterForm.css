@@ -1,0 +1,25 @@
+.createCalendar__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+
+  row-gap: 1rem;
+  padding: 0.5rem 0;
+}
+
+.createCalendar__section-box {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+
+  column-gap: 1rem;
+}
+
+.createCalendar__section-icon {
+  padding-top: 1.2rem;
+  width: 18px;
+}
+.createCalendar__saveBtn {
+  width: 5rem;
+  height: 2rem;
+}

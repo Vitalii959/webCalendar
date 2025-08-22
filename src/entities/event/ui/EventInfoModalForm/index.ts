@@ -1,0 +1,1 @@
+export {EventInfoModalForm} from "./EventInfoModalForm";

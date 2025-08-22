@@ -1,0 +1,25 @@
+.myCalendar__calendarBox {
+  display: flex;
+  align-items: center;
+
+  column-gap: 0.5rem;
+}
+
+.myCalendar__textArea {
+  display: flex;
+  flex: 3;
+  align-items: start;
+}
+.myCalendar__editBtn,
+.myCalendar__removeBtn,
+.myCalendar__acceptChanges {
+  opacity: 0;
+  position: relative;
+
+  cursor: none;
+}
+.myCalendar__calendarBox:hover .myCalendar__editBtn,
+.myCalendar__calendarBox:hover .myCalendar__removeBtn {
+  opacity: 1;
+  cursor: pointer;
+}

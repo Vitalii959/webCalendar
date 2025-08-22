@@ -1,0 +1,7 @@
+.mini-calendar {
+  background: white;
+  border-radius: 0.4rem;
+  width: 100%;
+  overflow: hidden;
+  box-shadow: 0px 4px 5px #96969699;
+}

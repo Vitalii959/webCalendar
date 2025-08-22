@@ -1,0 +1,7 @@
+.icon {
+  display: flex;
+  width: 25px;
+  height: 19px;
+  align-self: flex-end;
+  margin: 0 15px 10px 0;
+}

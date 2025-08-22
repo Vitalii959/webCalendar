@@ -1,0 +1,28 @@
+import "./description.css";
+import {InputField} from "@/shared/ui-kit/ui/inputField";
+import styles from "../iconsLayout.module.css";
+import {Icons} from "@/shared/ui-kit/icons";
+
+export type DescriptionProps = {
+  value: string;
+  onChange: (value: string) => void;
+};
+
+export const Description = ({value, onChange}: DescriptionProps) => {
+  return (
+    <div className='titleRow'>
+      <div className={`${styles.icon} p-0.5`}>
+        <Icons name='text' />
+      </div>
+      <div className='titleInputWrapper'>
+        <InputField
+          title='Title'
+          onChange={onChange}
+          type='text'
+          placeholder='Enter title'
+          value={value}
+        />
+      </div>
+    </div>
+  );
+};
