@@ -12,9 +12,10 @@ export const AppRoutes = () => {
   return (
     <Routes>
       <Route
-        path='/calendar'
-        element={user ? <WebCalendar /> : <Navigate to='/auth' />}
+        path='/'
+        element={user ? <Navigate to='/calendar' /> : <Navigate to='/auth' />}
       />
+      <Route path='/calendar' element={<WebCalendar />} />
       <Route path='/auth' element={<Auth />} />
     </Routes>
   );
