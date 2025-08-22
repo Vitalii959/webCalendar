@@ -1,7 +1,7 @@
 import "./calendarsList.css";
 import {useCalendarsListStore} from "@/features/calendars-filter/model/zustand";
 import {CalendarsFilterForm} from "../CalendarsFilterForm";
-import {useModalStore} from "@/entities/service/model/modal-storage.local";
+import {useModalStore} from "@/entities/service/model/modal-storage-local";
 import {Icons} from "@/shared/ui-kit/icons";
 import {CalendarItem} from "../CalendarItem";
 

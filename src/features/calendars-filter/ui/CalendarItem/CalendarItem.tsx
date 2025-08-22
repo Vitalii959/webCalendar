@@ -5,7 +5,7 @@ import {CheckBox} from "@/shared/ui-kit/ui/checkBox";
 import {editCalendar} from "../../model/handlers";
 import type {CalendarTypes} from "../../model/types";
 
-import {useModalStore} from "@/entities/service/model/modal-storage.local";
+import {useModalStore} from "@/entities/service/model/modal-storage-local";
 import {CalendarsFilterForm} from "@/features/calendars-filter/ui/CalendarsFilterForm";
 
 type CalendarItemType = {item: CalendarTypes};

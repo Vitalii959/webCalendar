@@ -9,7 +9,7 @@ import {useEventStore} from "@/entities/event/model/zustand";
 
 import {eachHourOfInterval, startOfDay, endOfDay} from "date-fns";
 import {createWeekArray} from "../../helper/calendarContainer.handler";
-import {useModalStore} from "@/entities/service/model/modal-storage.local";
+import {useModalStore} from "@/entities/service/model/modal-storage-local";
 import {EventInfoModalForm} from "@/entities/event/ui/EventInfoModalForm";
 import {EventForm} from "@/features/create-event/ui/EventForm";
 

@@ -1,5 +1,5 @@
 import "./CreateEventBtn.css";
-import {useModalStore} from "@/entities/service/model/modal-storage.local";
+import {useModalStore} from "@/entities/service/model/modal-storage-local";
 import {EventForm} from "../EventForm/EventForm";
 import {Button} from "@/shared/ui-kit/ui/Button";
 

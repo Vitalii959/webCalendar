@@ -1,5 +1,5 @@
 import {useCalendarsListStore} from "@/features/calendars-filter/model/zustand";
-import {useModalStore} from "@/entities/service/model/modal-storage.local";
+import {useModalStore} from "@/entities/service/model/modal-storage-local";
 
 type EditProps = (
   id: number,

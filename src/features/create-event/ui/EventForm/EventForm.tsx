@@ -10,7 +10,7 @@ import {Button} from "@/shared/ui-kit/ui/Button";
 import {hourRender, setSpecialDate} from "../../model/helpers";
 import {addMinutes} from "date-fns";
 import {useCalendarsListStore} from "@/features/calendars-filter/model/zustand";
-import {useModalStore} from "@/entities/service/model/modal-storage.local";
+import {useModalStore} from "@/entities/service/model/modal-storage-local";
 import {useNavigate} from "react-router";
 
 import {useEventStore} from "@/entities/event/model/zustand";
