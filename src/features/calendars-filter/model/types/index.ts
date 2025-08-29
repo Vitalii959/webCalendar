@@ -1,1 +1,1 @@
-export type {CalendarTypes} from "./calendar.types";
+export type {CalendarTypes, Errors} from "./calendar.types";

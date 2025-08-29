@@ -1,7 +1,9 @@
 export type CalendarTypes = {
   title: string;
-  value: string;
-  id: number;
+  id: string;
+  ownerId: string;
   color: string;
   checked: boolean;
 };
+
+export type Errors = {title: string; color: string};

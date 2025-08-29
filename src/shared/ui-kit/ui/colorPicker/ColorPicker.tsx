@@ -15,7 +15,7 @@ export function ColorPicker({
 }: colorPickerProps) {
   return (
     <div className='color-picker__wrapper'>
-      <div className='color-picker__title'>Colour</div>
+      <div className='color-picker__title'>Color</div>
       <div className='color-picker__container' {...restProps}>
         {colorOptions.map((color, index) => (
           <div

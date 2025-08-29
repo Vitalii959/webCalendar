@@ -2,31 +2,27 @@ import "./calendarItem.css";
 
 import {Icons} from "@/shared/ui-kit/icons";
 import {CheckBox} from "@/shared/ui-kit/ui/checkBox";
-import {editCalendar} from "../../model/handlers";
 import type {CalendarTypes} from "../../model/types";
 
 import {useModalStore} from "@/entities/service/model/modal-storage-local";
 import {CalendarsFilterForm} from "@/features/calendars-filter/ui/CalendarsFilterForm";
+import {useCalendarStore} from "@/entities/calendar/model/zustand";
 
 type CalendarItemType = {item: CalendarTypes};
-type editBtnClickProps = (
-  itemTitle: string,
-  itemColor: string,
-  itemId: number
-) => void;
+type editBtnClickProps = (item: CalendarTypes) => void;
 
 export const CalendarItem = ({item}: CalendarItemType) => {
   const openModal = useModalStore((state) => state.setModalContent);
+  const {deleteCalendar} = useCalendarStore();
+  const handleCheckboxChange = useCalendarStore(
+    (state) => state.handleCheckboxChange
+  );
 
-  const handleEditBtnClick: editBtnClickProps = (
-    itemTitle,
-    itemColor,
-    itemId
-  ) => {
+  const handleEditBtnClick: editBtnClickProps = (item) => {
     openModal(
       "Edit calendar",
       true,
-      <CalendarsFilterForm name={itemTitle} color={itemColor} id={itemId} />
+      <CalendarsFilterForm mode='edit' item={item} />
     );
   };
 
@@ -34,11 +30,9 @@ export const CalendarItem = ({item}: CalendarItemType) => {
     <div className='myCalendar__calendarBox' key={item.id}>
       <div
         className='myCalendar__checkbox'
-        onClick={() =>
-          editCalendar(item.id, {
-            checked: !item.checked
-          })
-        }
+        onClick={() => {
+          handleCheckboxChange(item.id);
+        }}
       >
         <CheckBox
           checked={item.checked}
@@ -49,11 +43,14 @@ export const CalendarItem = ({item}: CalendarItemType) => {
       <div className='myCalendar__textArea'>{item.title}</div>
       <div
         className='myCalendar__editBtn'
-        onClick={() => handleEditBtnClick(item.title, item.color, item.id)}
+        onClick={() => handleEditBtnClick(item)}
       >
         <Icons name='edit' />
       </div>
-      <div className='myCalendar__removeBtn'>
+      <div
+        className='myCalendar__removeBtn'
+        onClick={() => deleteCalendar(item.id)}
+      >
         <Icons name='delete' />
       </div>
     </div>

@@ -3,45 +3,70 @@ import {useState} from "react";
 import {InputField} from "@/shared/ui-kit/ui/inputField/InputField";
 import {ColorPicker} from "@/shared/ui-kit/ui/colorPicker/";
 import {Button} from "@/shared/ui-kit/ui/Button";
+import {colorArray} from "../../model/helpers";
+import {validate} from "../../model/validation";
+import {useNavigate} from "react-router";
 
-import {
-  editCalendar,
-  addNewCalendar
-} from "@/features/calendars-filter/model/handlers/editCalendar.handlers";
+import type {Errors} from "../../model/types";
+import {useUserStore} from "@/entities/user/model/zustand";
+import {useModalStore} from "@/entities/service/model/modal-storage-local";
+import {useCalendarStore} from "@/entities/calendar/model/zustand";
 
-export type CalendarFormProps = {
-  name?: string;
-  color?: string;
-  id?: number;
+const baseForm = {
+  title: "",
+  color: ""
 };
+type CreateMode = {
+  mode: "create";
+  item?: never;
+};
+type EditMode = {
+  mode: "edit";
+  item: {
+    title: string;
+    color: string;
+    id: string;
+    ownerId: string;
+    checked: boolean;
+  };
+};
+type Props = CreateMode | EditMode;
 
-const colorArray = [
-  "#9F2957",
-  "#D90056",
-  "#E25D33",
-  "#DFC45A",
-  "#B8C42F",
-  "#16AF6E",
-  "#429488",
-  "#397E49",
-  "#439BDF",
-  "#4254AF",
-  "#6C7AC4",
-  "#8332A4"
-];
-
-export const CalendarsFilterForm = ({name, color, id}: CalendarFormProps) => {
-  const [draftCalendarName, setDraftCalendarName] = useState(name || "");
-  const [draftCalendarColor, setDraftCalendarColor] = useState(color || "");
-
-  const onSave = () => {
-    if (!id) {
-      addNewCalendar(draftCalendarName, draftCalendarColor);
+export const CalendarsFilterForm = ({mode, item}: Props) => {
+  const initialForm = () => {
+    if (mode === "edit") {
+      return {
+        title: item.title,
+        color: item.color,
+        id: item.id
+      };
+    } else {
+      return {...baseForm};
     }
-    if (id) {
-      const title = draftCalendarName;
-      const color = draftCalendarColor;
-      editCalendar(id, {title, color});
+  };
+  const [draftCalendar, setDraftCalendar] = useState(() => initialForm());
+  const [errors, setErrors] = useState<Errors>({title: "", color: ""});
+  const user = useUserStore((state) => state.user);
+  const {addCalendar, editCalendar} = useCalendarStore();
+  const navigate = useNavigate();
+  const {closeModal} = useModalStore();
+
+  const handleSave = async () => {
+    if (!user?.uid) return navigate("/auth");
+
+    const {valid, errors} = validate(draftCalendar);
+    if (!valid) return setErrors(errors);
+
+    try {
+      if (mode === "create") {
+        await addCalendar(draftCalendar, user.uid);
+      }
+      if (mode === "edit") {
+        await editCalendar(draftCalendar, item.id);
+      }
+      closeModal();
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -53,9 +78,11 @@ export const CalendarsFilterForm = ({name, color, id}: CalendarFormProps) => {
           <InputField
             title='Title'
             type='text'
-            value={draftCalendarName}
+            error={errors.title}
+            defaultValue={draftCalendar.title}
+            // value={draftCalendar.title}
             placeholder='Enter title'
-            onChange={(e) => setDraftCalendarName(e)}
+            onChange={(e) => setDraftCalendar({...draftCalendar, title: e})}
           />
         </div>
       </div>
@@ -64,17 +91,16 @@ export const CalendarsFilterForm = ({name, color, id}: CalendarFormProps) => {
         <div className='createCalendar__section-content'>
           <ColorPicker
             colorOptions={colorArray}
-            colorPicked={draftCalendarColor}
-            setColorPicked={setDraftCalendarColor}
+            colorPicked={draftCalendar.color}
+            setColorPicked={(e) =>
+              setDraftCalendar({...draftCalendar, color: e})
+            }
           />
+          <p className='flex text-xs text-[#ff5620] mt-1'>{errors.color} </p>
         </div>
       </div>
       <div className='createCalendar__saveBtn'>
-        <Button
-          options='primary'
-          onClick={() => onSave()}
-          disabled={!draftCalendarName && !draftCalendarColor}
-        >
+        <Button options='primary' onClick={handleSave}>
           Save
         </Button>
       </div>

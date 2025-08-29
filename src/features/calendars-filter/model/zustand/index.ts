@@ -1,1 +1,1 @@
-export {useCalendarsListStore} from "./useCalendarsListStore";
+export {useCalendarsListStore} from "./useCalendarsListStor";
