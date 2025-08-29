@@ -49,7 +49,7 @@ export const useCalendarStore = create<CalendarsStore>((set, get) => ({
 
     const q = query(
       collection(db, "calendars"),
-      where("userId", "==", ownerId)
+      where("ownerId", "==", ownerId)
     );
 
     const unsubscribe = onSnapshot(q, (querySnapshot) => {

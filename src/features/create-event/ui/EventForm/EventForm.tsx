@@ -9,7 +9,6 @@ import {Button} from "@/shared/ui-kit/ui/Button";
 
 import {hourRender, setSpecialDate} from "../../model/helpers";
 import {addMinutes} from "date-fns";
-import {useCalendarsListStore} from "@/features/calendars-filter/model/zustand";
 import {useModalStore} from "@/entities/service/model/modal-storage-local";
 import {useNavigate} from "react-router";
 
@@ -17,6 +16,7 @@ import {useEventStore} from "@/entities/event/model/zustand";
 import {baseForm, repeatOptions} from "../../model/helpers";
 
 import type {EventType} from "@/entities/event/model/types";
+import {useCalendarStore} from "@/entities/calendar/model/zustand";
 
 type CreateMode = {
   mode: "create";
@@ -50,7 +50,7 @@ export const EventForm = (props: EventFormProps) => {
 
   const navigate = useNavigate();
   const {closeModal} = useModalStore();
-  const {calendarsArray} = useCalendarsListStore();
+  const calendars = useCalendarStore((state) => state.calendars);
   const {addEvent, editEvent} = useEventStore();
 
   const [form, setForm] = useState(() => initialForm());
@@ -114,7 +114,7 @@ export const EventForm = (props: EventFormProps) => {
       />
 
       <CalendarOptions
-        calendarsArray={calendarsArray}
+        calendarsArray={calendars}
         defaultValue={form.calendarName} //need to add defaultCalendar
         onSelect={(e) => updateFormField("calendarName", e)}
       />
