@@ -8,6 +8,6 @@
   flex-direction: column;
   align-items: start;
 
-  border-left: 4px solid #eec04c8d;
+  /* border-left: 4px solid; */
   border-radius: 0.3rem;
 }

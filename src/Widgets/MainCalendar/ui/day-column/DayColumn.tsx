@@ -3,6 +3,7 @@ import type {DBEvent} from "@/entities/event/model/types/event.types";
 import {quarters, timePicker} from "../../helper/calendarGrin.hendler.";
 import {EventCard} from "@/entities/event/ui/event-card";
 import {differenceInMinutes, format} from "date-fns";
+import {useCalendarStore} from "@/entities/calendar/model/zustand";
 
 type Props = {
   currentDay: Date;
@@ -17,6 +18,9 @@ export const DayColumn = ({
   onEventClick,
   onEmptyCellClick
 }: Props) => {
+  const calendars = useCalendarStore((state) => state.calendars);
+  console.log(calendars);
+
   return (
     <>
       <div
@@ -24,6 +28,9 @@ export const DayColumn = ({
         key={currentDay.toDateString()}
       >
         {events.map((event) => {
+          const eventColor = calendars.find(
+            (cal) => cal.title === event.calendarName
+          );
           return (
             <EventCard
               key={event.id}
@@ -40,6 +47,7 @@ export const DayColumn = ({
                 event.eventDate.startTime,
                 event.eventDate.day
               )}
+              color={eventColor?.color}
               onEventClick={() => onEventClick?.(event)}
             />
           );

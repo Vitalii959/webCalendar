@@ -4,14 +4,27 @@ type Props = {
   time: string;
   top: number;
   height: number;
+  color: string | undefined;
   onEventClick: () => void;
 };
 
-export const EventCard = ({title, time, top, height, onEventClick}: Props) => {
+export const EventCard = ({
+  title,
+  time,
+  top,
+  height,
+  color,
+  onEventClick
+}: Props) => {
   return (
     <div
       className='eventCard'
-      style={{top: `${top}px`, height: `${height}px`}}
+      style={{
+        top: `${top}px`,
+        height: `${height}px`,
+        backgroundColor: `${color}63`,
+        borderLeft: `4px solid ${color}`
+      }}
       onClick={onEventClick}
     >
       <p className='text-xl text-left ml-1'>{title}</p>
