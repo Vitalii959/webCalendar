@@ -1,1 +1,0 @@
-export {useCalendarsListStore} from "./useCalendarsListStor";
