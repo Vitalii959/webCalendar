@@ -2,6 +2,17 @@ import {create} from "zustand";
 import {addCalendarDB, editCalendarDB, deleteCalendarDB} from "../api";
 import {collection, onSnapshot, query, where} from "firebase/firestore";
 import {db} from "@/shared/lib/firebase/config";
+import {useUserStore} from "@/entities/user/model/zustand";
+
+const userName = useUserStore.getState().user?.displayName;
+
+const defaultCalendar = {
+  title: `${userName ? userName : "Default"}`,
+  color: "#f87171",
+  id: "default-id",
+  ownerId: "default-owner-id",
+  checked: true
+};
 
 type DBCalendar = {
   title: string;
@@ -59,7 +70,7 @@ export const useCalendarStore = create<CalendarsStore>((set, get) => ({
 
         calendarsArray.push({...data, id: doc.id, checked: false});
       });
-      set({calendars: [...calendarsArray]});
+      set({calendars: [defaultCalendar, ...calendarsArray]});
     });
 
     return unsubscribe;
