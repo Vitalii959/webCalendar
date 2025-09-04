@@ -19,7 +19,6 @@ export const DayColumn = ({
   onEmptyCellClick
 }: Props) => {
   const calendars = useCalendarStore((state) => state.calendars);
-  console.log(calendars);
 
   return (
     <>
