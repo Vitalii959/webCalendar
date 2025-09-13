@@ -1,8 +1,8 @@
 import "./calendarNavigation.css";
-import {Icons} from "@/shared/ui-kit/icons";
+import {Icons} from "@/shared/ui/icons";
 import {useCurrentDateStore} from "@/features/calendar-navigation/model/zustand";
 import {format, addWeeks} from "date-fns";
-import {Button} from "@/shared/ui-kit/ui/Button";
+import {Button} from "@/shared/ui/Button";
 
 export const CalendarNavigation = () => {
   const {currentDate} = useCurrentDateStore();

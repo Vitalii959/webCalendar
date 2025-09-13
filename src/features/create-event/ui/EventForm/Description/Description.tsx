@@ -1,7 +1,7 @@
 import "./description.css";
-import {InputField} from "@/shared/ui-kit/ui/inputField";
+import {InputField} from "@/shared/ui/inputField";
 import styles from "../iconsLayout.module.css";
-import {Icons} from "@/shared/ui-kit/icons";
+import {Icons} from "@/shared/ui/icons";
 
 export type DescriptionProps = {
   value: string;

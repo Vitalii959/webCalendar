@@ -1,10 +1,10 @@
 import "./button.css";
-import {Icons} from "@/shared/ui-kit/icons";
+import {Icons} from "@/shared/ui/icons";
 
 import classNames from "classnames";
 
 import React, {type CSSProperties} from "react";
-import {icons} from "@/shared/ui-kit/icons/iconsStorage";
+import {icons} from "@/shared/ui/icons/iconsStorage";
 
 type ButtonProps = {
   children?: React.ReactNode;

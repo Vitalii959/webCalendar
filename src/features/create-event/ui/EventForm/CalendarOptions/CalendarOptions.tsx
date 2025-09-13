@@ -1,7 +1,7 @@
-import {Icons} from "@/shared/ui-kit/icons";
-import {Select} from "@/shared/ui-kit/ui/select";
+import {Icons} from "@/shared/ui/icons";
+import {Select} from "@/shared/ui/select";
 import styles from "../iconsLayout.module.css";
-import type {CalendarTypes} from "@/features/calendars-filter/model/types";
+import type {CalendarTypes} from "@/entities/calendar/calendar.types";
 
 export type CalendarOptionsProps = {
   calendarsArray: CalendarTypes[];

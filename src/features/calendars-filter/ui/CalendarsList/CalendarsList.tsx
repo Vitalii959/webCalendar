@@ -1,19 +1,29 @@
 import "./calendarsList.css";
 import {CalendarsFilterForm} from "../CalendarsFilterForm";
-import {useModalStore} from "@/entities/service/model/modal-storage-local";
-import {Icons} from "@/shared/ui-kit/icons";
+import {useModalStore} from "@/shared/lib/modal-storage";
+import {Icons} from "@/shared/ui/icons";
 import {CalendarItem} from "../CalendarItem";
-import {useCalendarStore} from "@/entities/calendar/model/zustand";
+import {useCalendarStore} from "@/features/calendars-filter/model/useCalendarStore";
+import {useUserStore} from "@/entities/user/model/zustand";
 
 export const CalendarsList = () => {
-  const {calendars} = useCalendarStore();
-  const setModalContent = useModalStore((state) => state.setModalContent);
+  const calendars = useCalendarStore((s) => s.calendars);
+  const setModalContent = useModalStore((s) => s.setModalContent);
+  const userName = useUserStore((s) => s.user?.displayName);
   const handleOpenModal = () => {
     setModalContent(
       "Create calendar",
       true,
       <CalendarsFilterForm mode='create' />
     );
+  };
+  const defaultCalendar = {
+    title: userName ?? "Default",
+    color: "#f87171",
+    id: "default-id",
+    ownerId: "default-owner-id",
+    createdAt: new Date(),
+    updatedAt: null
   };
 
   return (
@@ -28,7 +38,7 @@ export const CalendarsList = () => {
         </div>
       </div>{" "}
       <div className='myCalendar__options'>
-        {" "}
+        <CalendarItem item={defaultCalendar} />
         {calendars.map((item) => (
           <CalendarItem key={item.id} item={item} />
         ))}

@@ -1,7 +1,7 @@
 import "./repeatEvent.css";
-import {CheckBox} from "@/shared/ui-kit/ui/checkBox";
+import {CheckBox} from "@/shared/ui/checkBox";
 
-import {Select} from "@/shared/ui-kit/ui/select";
+import {Select} from "@/shared/ui/select";
 import styles from "../iconsLayout.module.css";
 
 type RepeatEventProps = {

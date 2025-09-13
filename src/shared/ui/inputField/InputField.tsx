@@ -1,5 +1,5 @@
 import "./inputField.css";
-import {Icons} from "@/shared/ui-kit/icons";
+import {Icons} from "@/shared/ui/icons";
 import classNames from "classnames";
 import React, {useState} from "react";
 

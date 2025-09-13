@@ -1,4 +1,4 @@
-import {Button} from "@/shared/ui-kit/ui/Button";
+import {Button} from "@/shared/ui/Button";
 import "./deleteConfirmationForm.css";
 
 type Props = {

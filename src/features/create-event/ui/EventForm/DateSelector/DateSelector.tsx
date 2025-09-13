@@ -1,8 +1,8 @@
 import styles from "../iconsLayout.module.css";
-import {InputField} from "@/shared/ui-kit/ui/inputField";
-import {Select} from "@/shared/ui-kit/ui/select";
-import {Calendar} from "@/shared/ui-kit/ui/calendar";
-import {Icons} from "@/shared/ui-kit/icons";
+import {InputField} from "@/shared/ui/inputField";
+import {Select} from "@/shared/ui/select";
+import {Calendar} from "@/shared/ui/calendar";
+import {Icons} from "@/shared/ui/icons";
 
 import {format} from "date-fns";
 

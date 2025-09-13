@@ -1,6 +1,6 @@
 import "./toast.css";
 import React from "react";
-import {Icons} from "@/shared/ui-kit/icons";
+import {Icons} from "@/shared/ui/icons";
 
 type Props = {
   children: React.ReactNode;

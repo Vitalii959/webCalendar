@@ -1,6 +1,6 @@
 import "./MiniCalendar.css";
 
-import {Calendar} from "@/shared/ui-kit/ui/calendar";
+import {Calendar} from "@/shared/ui/calendar";
 
 import {useCurrentDateStore} from "@/features/calendar-navigation/model/zustand";
 
