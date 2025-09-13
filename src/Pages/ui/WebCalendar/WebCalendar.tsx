@@ -1,35 +1,38 @@
 import "./WebCalendar.css";
 import {NavBar} from "@/Widgets/NavBar/ui/NavBar";
-import {ModalContainer} from "@/entities/service/ui/modal-container/ModalContainer";
+import {ModalContainer} from "@/shared/ui/modal";
 import {Sidebar} from "@/Widgets/Sidebar/ui/Sidebar";
 import {CalendarContainer} from "@/Widgets/MainCalendar/ui/calendar-container";
 import {useEffect} from "react";
 import {useUserStore} from "@/entities/user/model/zustand";
 import {useEventStore} from "@/entities/event/model/zustand";
 import {ToastContainer} from "@/entities/service/ui/toast-container";
-import {useCalendarStore} from "@/entities/calendar/model/zustand";
+import {calendarRepository} from "@/entities/calendar/model/repository";
+import {useCalendarStore} from "@/features/calendars-filter/model/useCalendarStore";
 
 document.body.setAttribute("data-theme", "light-theme");
 
 export const WebCalendar = () => {
-  const {user} = useUserStore();
-  const {startSync, stopSync} = useEventStore();
-  const {startCalendarListener} = useCalendarStore();
+  const user = useUserStore((s) => s.user);
+  const {startSync, stopSync} = useEventStore.getState();
+  const {setCalendars} = useCalendarStore.getState();
+
   useEffect(() => {
     if (!user) return;
     startSync(user.uid);
     return () => stopSync();
   }, [user, startSync, stopSync]);
 
+  // feature/move it into custom hook
   useEffect(() => {
     if (!user?.uid) return;
 
-    const unsubscribe = startCalendarListener(user.uid);
-
-    return () => {
-      if (unsubscribe) unsubscribe();
-    };
-  }, [user?.uid, startCalendarListener]);
+    const unsubscribe = calendarRepository.subscribeCalendars(
+      user.uid,
+      setCalendars
+    );
+    return () => unsubscribe();
+  }, [user?.uid, setCalendars]);
 
   return (
     <div className='w-full h-dvh relative'>

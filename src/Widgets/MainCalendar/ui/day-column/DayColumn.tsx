@@ -3,7 +3,7 @@ import type {DBEvent} from "@/entities/event/model/types/event.types";
 import {quarters, timePicker} from "../../helper/calendarGrin.hendler.";
 import {EventCard} from "@/entities/event/ui/event-card";
 import {differenceInMinutes, format} from "date-fns";
-import {useCalendarStore} from "@/entities/calendar/model/zustand";
+import {useCalendarStore} from "@/features/calendars-filter/model/useCalendarStore";
 
 type Props = {
   currentDay: Date;
@@ -19,7 +19,6 @@ export const DayColumn = ({
   onEmptyCellClick
 }: Props) => {
   const calendars = useCalendarStore((state) => state.calendars);
-  console.log(calendars);
 
   return (
     <>

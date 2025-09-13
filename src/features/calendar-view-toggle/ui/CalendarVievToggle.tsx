@@ -1,6 +1,6 @@
 import "./calendarVievToggle.css";
 
-import {DropDown} from "@/shared/ui-kit/ui/dropDown";
+import {DropDown} from "@/shared/ui/dropDown";
 import {useViewToggle} from "../model/zustand";
 
 const calendarGridOptions = [

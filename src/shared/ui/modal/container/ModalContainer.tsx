@@ -1,6 +1,6 @@
-import {Modal} from "@/shared/ui-kit/ui/modal";
+import {Modal} from "@/shared/ui/modal";
 import "./modalContainer.css";
-import {useModalStore} from "@/entities/service/model/modal-storage-local";
+import {useModalStore} from "@/shared/lib/modal-storage";
 
 export const ModalContainer = () => {
   const isOpen = useModalStore((state) => state.isOpen);

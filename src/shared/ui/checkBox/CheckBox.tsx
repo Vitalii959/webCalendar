@@ -1,5 +1,5 @@
 import "./checkBox.css";
-import {Icons} from "@/shared/ui-kit/icons";
+import {Icons} from "@/shared/ui/icons";
 
 type checkBoxType = {
   title?: string;

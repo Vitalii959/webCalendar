@@ -1,4 +1,4 @@
-import {Icons} from "@/shared/ui-kit/icons";
+import {Icons} from "@/shared/ui/icons";
 import "./modal.css";
 import React from "react";
 

@@ -1,46 +1,47 @@
 import "./calendarItem.css";
 
-import {Icons} from "@/shared/ui-kit/icons";
-import {CheckBox} from "@/shared/ui-kit/ui/checkBox";
-import type {CalendarTypes} from "../../model/types";
+import {Icons} from "@/shared/ui/icons";
+import {CheckBox} from "@/shared/ui/checkBox";
+import type {CalendarTypes} from "@/entities/calendar/calendar.types";
 
-import {useModalStore} from "@/entities/service/model/modal-storage-local";
+import {useModalStore} from "@/shared/lib/modal-storage";
 import {CalendarsFilterForm} from "@/features/calendars-filter/ui/CalendarsFilterForm";
-import {useCalendarStore} from "@/entities/calendar/model/zustand";
+import {useCalendarStore} from "../../model/useCalendarStore";
+import {calendarActions} from "../../model/actions";
 
 type CalendarItemType = {item: CalendarTypes};
 type editBtnClickProps = (item: CalendarTypes) => void;
 
 export const CalendarItem = ({item}: CalendarItemType) => {
-  const openModal = useModalStore((state) => state.setModalContent);
-  const {deleteCalendar} = useCalendarStore();
-  const handleCheckboxChange = useCalendarStore(
-    (state) => state.handleCheckboxChange
-  );
+  const {setModalContent} = useModalStore.getState();
+  const selectedIds = useCalendarStore((s) => s.selectedIds);
+  const {toggleSelectedIds} = useCalendarStore.getState();
+  const deleteCalendar = calendarActions.deleteCalendar;
 
   const handleEditBtnClick: editBtnClickProps = (item) => {
-    openModal(
+    setModalContent(
       "Edit calendar",
       true,
       <CalendarsFilterForm mode='edit' item={item} />
     );
   };
-  console.log(item.color);
 
   return (
     <div className='myCalendar__calendarBox' key={item.id}>
       <div
         className='myCalendar__checkbox'
         onClick={() => {
-          handleCheckboxChange(item.id);
+          toggleSelectedIds(item.id);
         }}
         style={{
-          backgroundColor: item.checked ? `${item.color}62` : "transparent",
+          backgroundColor: selectedIds.includes(item.id)
+            ? `${item.color}62`
+            : "transparent",
           borderRadius: "4px"
         }}
       >
         <CheckBox
-          checked={item.checked}
+          checked={selectedIds.includes(item.id)}
           name='myCalendar1'
           iconColor={item.color}
           title={item.title}

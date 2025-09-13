@@ -18,6 +18,7 @@ import {useEffect, useMemo} from "react";
 import type {DBEvent} from "@/entities/event/model/types/event.types";
 import {useToastStore} from "@/entities/service/model/toast-storage-local";
 import {DeleteConfirmationForm} from "@/shared/ui-kit/ui/delete-confirmation-form";
+import {useCalendarStore} from "@/entities/calendar/model/zustand";
 
 const hoursArray = () => {
   return eachHourOfInterval({
@@ -34,6 +35,21 @@ export const CalendarContainer = () => {
   const {deleteStatus} = useEventStore();
   const {setModalContent} = useModalStore();
   const {closeModal} = useModalStore();
+
+  const calendars = useCalendarStore((state) => state.calendars);
+
+  const filterByCheckedCalendars = () => {
+    const checkedIds = calendars
+      .filter((cal) => cal.checked)
+      .map((cal) => cal.title);
+
+    const filteredEvents = events.filter((event) => {
+      return checkedIds.includes(event.calendarName);
+    });
+    return filteredEvents;
+  };
+
+  const eventsToShow = useMemo(filterByCheckedCalendars, [events, calendars]);
 
   const {show} = useToastStore();
 
@@ -99,7 +115,7 @@ export const CalendarContainer = () => {
               </div>
               <CalendarGrid
                 weekArray={weekArray}
-                events={events}
+                events={eventsToShow}
                 onEventClick={onEventClick}
                 onEmptyCellClick={onEmptyCellClick}
               />

@@ -1,6 +1,6 @@
 import "./auth.css";
 import {auth} from "@/shared/lib/firebase/config";
-import {Button} from "@/shared/ui-kit/ui/Button";
+import {Button} from "@/shared/ui/Button";
 import {GoogleAuthProvider, signInWithPopup} from "firebase/auth";
 import {useNavigate} from "react-router";
 

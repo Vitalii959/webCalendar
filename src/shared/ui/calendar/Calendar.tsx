@@ -1,5 +1,5 @@
 import "./calendar.css";
-import {Icons} from "@/shared/ui-kit/icons";
+import {Icons} from "@/shared/ui/icons";
 import classNames from "classnames";
 import {useEffect, useState} from "react";
 

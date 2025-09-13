@@ -1,18 +1,19 @@
 import "./calendarsFilterForm.css";
-import {useState} from "react";
-import {InputField} from "@/shared/ui-kit/ui/inputField/InputField";
-import {ColorPicker} from "@/shared/ui-kit/ui/colorPicker/";
-import {Button} from "@/shared/ui-kit/ui/Button";
+import {useEffect, useState} from "react";
+import {InputField} from "@/shared/ui/inputField/InputField";
+import {ColorPicker} from "@/shared/ui/colorPicker";
+import {Button} from "@/shared/ui/Button";
 import {colorArray} from "../../model/helpers";
 import {validate} from "../../model/validation";
-import {useNavigate} from "react-router";
 
-import type {Errors} from "../../model/types";
-import {useUserStore} from "@/entities/user/model/zustand";
-import {useModalStore} from "@/entities/service/model/modal-storage-local";
-import {useCalendarStore} from "@/entities/calendar/model/zustand";
+import type {CalendarTypes, Errors} from "../../../../entities/calendar";
+import {useModalStore} from "@/shared/lib/modal-storage";
+import {calendarActions} from "@/features/calendars-filter/model/actions";
+import {useCalendarStore} from "../../model/useCalendarStore";
+import {useToastStore} from "@/shared/lib/toast-storage";
 
-const baseForm = {
+type CalendarCreate = {title: string; color: string};
+const baseForm: CalendarCreate = {
   title: "",
   color: ""
 };
@@ -22,52 +23,36 @@ type CreateMode = {
 };
 type EditMode = {
   mode: "edit";
-  item: {
-    title: string;
-    color: string;
-    id: string;
-    ownerId: string;
-    checked: boolean;
-  };
+  item: CalendarTypes;
 };
 type Props = CreateMode | EditMode;
 
 export const CalendarsFilterForm = ({mode, item}: Props) => {
-  const initialForm = () => {
-    if (mode === "edit") {
-      return {
-        title: item.title,
-        color: item.color,
-        id: item.id
-      };
-    } else {
-      return {...baseForm};
-    }
-  };
-  const [draftCalendar, setDraftCalendar] = useState(() => initialForm());
+  const status = useCalendarStore((s) => s.calendarStatus);
+  const setToast = useToastStore.getState().setToast;
+
+  useEffect(() => {
+    if (status === "error") setToast("Error", 2000);
+    if (status === "success") setToast("Saved", 2000);
+  }, [status, setToast]);
+  const initialForm = (): CalendarCreate =>
+    mode === "edit" ? {title: item.title, color: item.color} : {...baseForm};
+
+  const [draftCalendar, setDraftCalendar] = useState(initialForm);
   const [errors, setErrors] = useState<Errors>({title: "", color: ""});
-  const user = useUserStore((state) => state.user);
-  const {addCalendar, editCalendar} = useCalendarStore();
-  const navigate = useNavigate();
-  const {closeModal} = useModalStore();
+
+  const closeModal = useModalStore((s) => s.closeModal);
 
   const handleSave = async () => {
-    if (!user?.uid) return navigate("/auth");
-
     const {valid, errors} = validate(draftCalendar);
     if (!valid) return setErrors(errors);
 
-    try {
-      if (mode === "create") {
-        await addCalendar(draftCalendar, user.uid);
-      }
-      if (mode === "edit") {
-        await editCalendar(draftCalendar, item.id);
-      }
-      closeModal();
-    } catch (error) {
-      console.log(error);
+    if (mode === "create") {
+      await calendarActions.createCalendar(draftCalendar);
+    } else {
+      await calendarActions.updateCalendar(item.id, draftCalendar);
     }
+    closeModal();
   };
 
   return (
@@ -80,7 +65,6 @@ export const CalendarsFilterForm = ({mode, item}: Props) => {
             type='text'
             error={errors.title}
             defaultValue={draftCalendar.title}
-            // value={draftCalendar.title}
             placeholder='Enter title'
             onChange={(e) => setDraftCalendar({...draftCalendar, title: e})}
           />

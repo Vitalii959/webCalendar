@@ -1,5 +1,5 @@
 import "./eventInfoModalForm.css";
-import {Icons} from "@/shared/ui-kit/icons";
+import {Icons} from "@/shared/ui/icons";
 import {format} from "date-fns";
 import type {EventType} from "@/entities/event/model/types";
 
