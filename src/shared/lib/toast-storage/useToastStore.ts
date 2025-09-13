@@ -5,7 +5,7 @@ type ToastStore = {
   content: string;
   delayMsec: number;
   timerId?: number;
-  show: (content: string, delay?: number) => void;
+  setToast: (content: string, delay?: number) => void;
   hide: () => void;
 };
 
@@ -14,7 +14,7 @@ export const useToastStore = create<ToastStore>((set, get) => ({
   content: "",
   delayMsec: 2000,
   timerId: undefined,
-  show: (content, delay) => {
+  setToast: (content, delay) => {
     const d = delay ?? get().delayMsec;
     set({showToast: true, content: content});
 
