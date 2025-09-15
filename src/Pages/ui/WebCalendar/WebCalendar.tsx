@@ -6,7 +6,7 @@ import {CalendarContainer} from "@/Widgets/MainCalendar/ui/calendar-container";
 import {useEffect} from "react";
 import {useUserStore} from "@/entities/user/model/zustand";
 import {useEventStore} from "@/entities/event/model/zustand";
-import {ToastContainer} from "@/entities/service/ui/toast-container";
+import {ToastContainer} from "@/shared/ui/toast";
 import {calendarRepository} from "@/entities/calendar/model/repository";
 import {useCalendarStore} from "@/features/calendars-filter/model/useCalendarStore";
 

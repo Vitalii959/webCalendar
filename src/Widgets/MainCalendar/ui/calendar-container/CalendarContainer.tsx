@@ -9,16 +9,16 @@ import {useEventStore} from "@/entities/event/model/zustand";
 
 import {eachHourOfInterval, startOfDay, endOfDay} from "date-fns";
 import {createWeekArray} from "../../helper/calendarContainer.handler";
-import {useModalStore} from "@/entities/service/model/modal-storage-local";
+import {useModalStore} from "@/shared/lib/modal-storage";
 import {EventInfoModalForm} from "@/entities/event/ui/EventInfoModalForm";
 import {EventForm} from "@/features/create-event/ui/EventForm";
 
 import {useEffect, useMemo} from "react";
 
 import type {DBEvent} from "@/entities/event/model/types/event.types";
-import {useToastStore} from "@/entities/service/model/toast-storage-local";
-import {DeleteConfirmationForm} from "@/shared/ui-kit/ui/delete-confirmation-form";
-import {useCalendarStore} from "@/entities/calendar/model/zustand";
+import {useToastStore} from "@/shared/lib/toast-storage";
+import {DeleteConfirmationForm} from "@/shared/ui/delete-confirmation-form";
+import {useCalendarStore} from "@/features/calendars-filter/model/useCalendarStore";
 
 const hoursArray = () => {
   return eachHourOfInterval({
@@ -36,22 +36,19 @@ export const CalendarContainer = () => {
   const {setModalContent} = useModalStore();
   const {closeModal} = useModalStore();
 
-  const calendars = useCalendarStore((state) => state.calendars);
+  const {selectedIds} = useCalendarStore();
 
   const filterByCheckedCalendars = () => {
-    const checkedIds = calendars
-      .filter((cal) => cal.checked)
-      .map((cal) => cal.title);
+    const filteredEvents = events;
+    console.log(events);
+    console.log(selectedIds);
 
-    const filteredEvents = events.filter((event) => {
-      return checkedIds.includes(event.calendarName);
-    });
     return filteredEvents;
   };
 
-  const eventsToShow = useMemo(filterByCheckedCalendars, [events, calendars]);
+  const eventsToShow = useMemo(filterByCheckedCalendars, [events]);
 
-  const {show} = useToastStore();
+  const {setToast: show} = useToastStore();
 
   useEffect(() => {
     if (deleteStatus === "success") show("Event has been deleted");
