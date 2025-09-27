@@ -1,5 +1,5 @@
 import "./dayColumn.css";
-import type {DBEvent} from "@/entities/event/model/types/event.types";
+import type {DBEvent} from "@/entities/event/event.types";
 import {quarters, timePicker} from "../../helper/calendarGrin.hendler.";
 import {EventCard} from "@/entities/event/ui/event-card";
 import {differenceInMinutes, format} from "date-fns";

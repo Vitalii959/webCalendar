@@ -43,7 +43,7 @@ export const CalendarsFilterForm = ({mode, item}: Props) => {
 
   const closeModal = useModalStore((s) => s.closeModal);
 
-  const handleSave = async () => {
+  const onEventFormSave = async () => {
     const {valid, errors} = validate(draftCalendar);
     if (!valid) return setErrors(errors);
 
@@ -84,7 +84,7 @@ export const CalendarsFilterForm = ({mode, item}: Props) => {
         </div>
       </div>
       <div className='createCalendar__saveBtn'>
-        <Button options='primary' onClick={handleSave}>
+        <Button options='primary' onClick={onEventFormSave}>
           Save
         </Button>
       </div>

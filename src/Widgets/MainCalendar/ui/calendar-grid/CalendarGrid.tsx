@@ -1,5 +1,5 @@
 import {DayColumn} from "../day-column";
-import type {DBEvent} from "@/entities/event/model/types/event.types";
+import type {DBEvent} from "@/entities/event/event.types";
 
 type Props = {
   weekArray: Date[];

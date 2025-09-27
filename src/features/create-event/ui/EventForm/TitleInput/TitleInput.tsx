@@ -5,10 +5,11 @@ import styles from "../iconsLayout.module.css";
 
 export type TitleInputProps = {
   value: string;
+  error?: string;
   onChange: (value: string) => void;
 };
 
-export const TitleInput = ({value, onChange}: TitleInputProps) => {
+export const TitleInput = ({value, error, onChange}: TitleInputProps) => {
   return (
     <div className='flex'>
       <div className={styles.icon}>
@@ -21,6 +22,7 @@ export const TitleInput = ({value, onChange}: TitleInputProps) => {
           type='text'
           placeholder='Enter title'
           value={value}
+          error={error}
         />
       </div>
     </div>

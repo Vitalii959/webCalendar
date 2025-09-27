@@ -19,8 +19,7 @@ export const calendarActions = {
     const ownerId = requireUid();
     if (!ownerId) return;
     try {
-      const calendarId = await calendarRepository.createCalendar(ownerId, data);
-      console.log("Calendar created with ID:", calendarId);
+      await calendarRepository.createCalendar(ownerId, data);
     } catch (error) {
       console.error("Failed to create calendar", error);
       throw error;
