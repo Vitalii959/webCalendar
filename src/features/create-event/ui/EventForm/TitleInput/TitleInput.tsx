@@ -1,6 +1,6 @@
 import "./titleInput.css";
-import {Icons} from "@/shared/ui-kit/icons";
-import {InputField} from "@/shared/ui-kit/ui/inputField";
+import {Icons} from "@/shared/ui/icons";
+import {InputField} from "@/shared/ui/inputField";
 import styles from "../iconsLayout.module.css";
 
 export type TitleInputProps = {

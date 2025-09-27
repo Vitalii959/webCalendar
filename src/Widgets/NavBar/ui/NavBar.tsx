@@ -7,7 +7,7 @@ import {CalendarNavigation} from "@/features/calendar-navigation/ui";
 import {useRef, useState} from "react";
 import {useUserStore} from "@/entities/user/model/zustand";
 import {useClickOutside} from "@/shared/hooks";
-import {Button} from "@/shared/ui-kit/ui/Button";
+import {Button} from "@/shared/ui/Button";
 
 export const NavBar = () => {
   const [logoutVisibility, setLogoutVisibility] = useState(false);

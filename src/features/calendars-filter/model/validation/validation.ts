@@ -1,4 +1,4 @@
-import type {Errors} from "../types";
+import type {Errors} from "../../../../entities/calendar";
 import {colorArray} from "../helpers";
 
 const colors = colorArray;

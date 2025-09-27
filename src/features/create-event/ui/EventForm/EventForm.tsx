@@ -5,18 +5,18 @@ import {TitleInput} from "./TitleInput";
 import {RepeatEvent} from "./RepeatEvent";
 import {CalendarOptions} from "./CalendarOptions";
 import {Description} from "./Description";
-import {Button} from "@/shared/ui-kit/ui/Button";
+import {Button} from "@/shared/ui/Button";
 
 import {hourRender, setSpecialDate} from "../../model/helpers";
 import {addMinutes} from "date-fns";
-import {useModalStore} from "@/entities/service/model/modal-storage-local";
+import {useModalStore} from "@/shared/lib/modal-storage";
 import {useNavigate} from "react-router";
 
 import {useEventStore} from "@/entities/event/model/zustand";
 import {baseForm, repeatOptions} from "../../model/helpers";
 
 import type {EventType} from "@/entities/event/model/types";
-import {useCalendarStore} from "@/entities/calendar/model/zustand";
+import {useCalendarStore} from "@/features/calendars-filter/model/useCalendarStore";
 
 type CreateMode = {
   mode: "create";
@@ -49,9 +49,9 @@ export const EventForm = (props: EventFormProps) => {
   };
 
   const navigate = useNavigate();
-  const {closeModal} = useModalStore();
-  const calendars = useCalendarStore((state) => state.calendars);
-  const {addEvent, editEvent} = useEventStore();
+  const {closeModal} = useModalStore.getState();
+  const calendars = useCalendarStore((s) => s.calendars);
+  const {addEvent, editEvent} = useEventStore.getState();
 
   const [form, setForm] = useState(() => initialForm());
 
