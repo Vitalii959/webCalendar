@@ -16,10 +16,10 @@ export const Description = ({value, onChange}: DescriptionProps) => {
       </div>
       <div className='titleInputWrapper'>
         <InputField
-          title='Title'
+          title='Description'
           onChange={onChange}
           type='text'
-          placeholder='Enter title'
+          placeholder='Enter description'
           value={value}
         />
       </div>

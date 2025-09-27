@@ -1,7 +1,7 @@
 import "./eventInfoModalForm.css";
 import {Icons} from "@/shared/ui/icons";
 import {format} from "date-fns";
-import type {EventType} from "@/entities/event/model/types";
+import type {EventType} from "../../event.types";
 
 type Props = {
   defaultValues: EventType;
