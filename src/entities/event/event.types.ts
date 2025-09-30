@@ -12,5 +12,13 @@ export type EventType = {
   description: string;
 };
 
+export type EventCreate = EventType & {ownerId: string; createdAt: Date};
+export type EventEdit = EventType & {updatedAt: string};
+
 // after pulling event from firestore assigning event and use id's
-export type DBEvent = EventType & {id: string; userId: string};
+export type DBEvent = EventType & {
+  id: string;
+  userId: string;
+  createdAt: Date;
+  updatedAt: Date;
+};

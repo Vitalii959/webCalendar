@@ -1,6 +1,5 @@
 import {create} from "zustand";
 import {signOut, type User} from "firebase/auth";
-import {useEventStore} from "@/entities/event/model/zustand";
 import {auth} from "@/shared/lib/firebase/config";
 import type {StatusType} from "@/shared/lib/status";
 
@@ -22,7 +21,6 @@ export const useUserStore = create<Store>((set) => ({
   logout: async () => {
     set({logoutStatus: "loading"});
     try {
-      useEventStore.getState().stopSync();
       await signOut(auth);
 
       set({user: null, logoutStatus: "success"});

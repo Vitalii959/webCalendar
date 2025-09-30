@@ -1,6 +1,6 @@
 import {addMinutes, startOfDay} from "date-fns";
 import {roundUpToNextQuarter} from "./timeUtils";
-import type {EventType} from "@/entities/event/model/types";
+import type {EventType} from "@/entities/event/event.types";
 
 export const repeatOptions = [
   {title: "Every Year", value: "Yearly"},

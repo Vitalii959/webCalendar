@@ -7,7 +7,7 @@ import {Icons} from "@/shared/ui/icons";
 import {format} from "date-fns";
 
 import {useState} from "react";
-import type {EventType} from "@/entities/event/model/types";
+import type {EventType} from "@/entities/event/event.types";
 
 type SetEventDate = (args: {
   key: keyof EventType["eventDate"];
