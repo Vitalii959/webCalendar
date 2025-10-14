@@ -43,8 +43,9 @@ export const EventForm = (props: EventFormProps) => {
     }
     if (props.mode === "create" && props.createOnSpecialDate) {
       const specialDate = setSpecialDate(props.createOnSpecialDate);
+      console.log(calendars[0]);
 
-      return {...baseForm, ...specialDate};
+      return {...baseForm, calendarName: calendars[0].title, ...specialDate};
     }
     return baseForm;
   };
@@ -68,6 +69,7 @@ export const EventForm = (props: EventFormProps) => {
     const user = useUserStore.getState().user?.uid;
     if (!user) return navigate("/auth");
 
+    console.log(draftEvent);
     const {valid, errors} = validateEvent(draftEvent);
     if (!valid) {
       setErrors(errors);
@@ -126,7 +128,7 @@ export const EventForm = (props: EventFormProps) => {
 
       <CalendarOptions
         calendarsArray={calendars}
-        defaultValue={draftEvent.calendarName} //need to add defaultCalendar
+        defaultValue={draftEvent.calendarName}
         onSelect={(e) => updateFormField("calendarName", e)}
       />
       <Description

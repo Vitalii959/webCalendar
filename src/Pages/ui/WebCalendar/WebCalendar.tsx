@@ -44,7 +44,9 @@ export const WebCalendar = () => {
         <Sidebar />
         <CalendarContainer />
       </section>
-      <ModalContainer />
+      <div className='modal-container'>
+        <ModalContainer />
+      </div>
       <ToastContainer />
     </div>
   );
