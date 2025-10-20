@@ -37,7 +37,10 @@ export const RepeatEvent = ({
         <Select
           options={options}
           defaultValue={defaultValue}
-          onSelect={onSelect}
+          onChangeOption={(e) => {
+            const valueSelected = e.value;
+            onSelect(valueSelected);
+          }}
         />
       )}
     </div>

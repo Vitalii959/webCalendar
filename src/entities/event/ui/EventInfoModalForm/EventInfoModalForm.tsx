@@ -32,7 +32,9 @@ export const EventInfoModalForm = ({defaultValues}: Props) => {
       <div>
         <Icons name='calendar' />
       </div>
-      <div className='event-calendar'>{defaultValues.calendarName}</div>
+      <div className='event-calendar'>
+        {defaultValues.calendar.calendarName}
+      </div>
 
       <div>
         <Icons name='description' />

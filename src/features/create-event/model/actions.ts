@@ -22,7 +22,7 @@ export const eventActions = {
       eventDate,
       allDayChecked,
       repeatRule,
-      calendarName,
+      calendar,
       description
     } = event;
 
@@ -31,7 +31,7 @@ export const eventActions = {
       eventDate,
       allDayChecked,
       repeatRule,
-      calendarName,
+      calendar,
       description
     });
   },

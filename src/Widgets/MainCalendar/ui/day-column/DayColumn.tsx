@@ -19,6 +19,7 @@ export const DayColumn = ({
   onEmptyCellClick
 }: Props) => {
   const calendars = useCalendarStore((state) => state.calendars);
+  const selectedId = useCalendarStore((state) => state.selectedIds);
 
   return (
     <>
@@ -27,28 +28,35 @@ export const DayColumn = ({
         key={currentDay.toDateString()}
       >
         {events.map((event) => {
-          const eventColor = calendars.find(
-            (cal) => cal.title === event.calendarName
+          const getCalendarById = calendars.find(
+            (cal) => cal.id === event.calendar.calendarId
           );
+
+          const isVisible = selectedId.includes(event.calendar.calendarId);
+
           return (
-            <EventCard
-              key={event.id}
-              title={event.eventTitle}
-              time={`${format(event.eventDate.startTime, "p")} - ${format(
-                event.eventDate.endTime,
-                "p"
-              )}`}
-              height={differenceInMinutes(
-                event.eventDate.endTime,
-                event.eventDate.startTime
+            <>
+              {isVisible && (
+                <EventCard
+                  key={event.id}
+                  title={event.eventTitle}
+                  time={`${format(event.eventDate.startTime, "p")} - ${format(
+                    event.eventDate.endTime,
+                    "p"
+                  )}`}
+                  height={differenceInMinutes(
+                    event.eventDate.endTime,
+                    event.eventDate.startTime
+                  )}
+                  top={differenceInMinutes(
+                    event.eventDate.startTime,
+                    event.eventDate.day
+                  )}
+                  color={getCalendarById?.color}
+                  onEventClick={() => onEventClick?.(event)}
+                />
               )}
-              top={differenceInMinutes(
-                event.eventDate.startTime,
-                event.eventDate.day
-              )}
-              color={eventColor?.color}
-              onEventClick={() => onEventClick?.(event)}
-            />
+            </>
           );
         })}
 

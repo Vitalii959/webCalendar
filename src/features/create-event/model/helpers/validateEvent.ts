@@ -15,7 +15,7 @@ export const validateEvent = (draftEvent: EventType): ValidationResult => {
     errors.title = "Title is required";
   }
 
-  if (!draftEvent.calendarName) {
+  if (!draftEvent.calendar.calendarName) {
     errors.calendarName = "Calendar is requireUid";
   }
   return {valid: Object.keys(errors).length === 0, errors};

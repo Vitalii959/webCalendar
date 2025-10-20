@@ -17,6 +17,6 @@ export const baseForm: EventType = {
   },
   allDayChecked: false,
   repeatRule: "",
-  calendarName: "",
+  calendar: {calendarName: "", calendarId: ""},
   description: ""
 };

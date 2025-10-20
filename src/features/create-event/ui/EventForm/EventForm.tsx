@@ -43,9 +43,15 @@ export const EventForm = (props: EventFormProps) => {
     }
     if (props.mode === "create" && props.createOnSpecialDate) {
       const specialDate = setSpecialDate(props.createOnSpecialDate);
-      console.log(calendars[0]);
 
-      return {...baseForm, calendarName: calendars[0].title, ...specialDate};
+      return {
+        ...baseForm,
+        calendar: {
+          calendarName: calendars[0].title,
+          calendarId: calendars[0].id
+        },
+        ...specialDate
+      };
     }
     return baseForm;
   };
@@ -69,8 +75,8 @@ export const EventForm = (props: EventFormProps) => {
     const user = useUserStore.getState().user?.uid;
     if (!user) return navigate("/auth");
 
-    console.log(draftEvent);
     const {valid, errors} = validateEvent(draftEvent);
+
     if (!valid) {
       setErrors(errors);
       return;
@@ -78,8 +84,10 @@ export const EventForm = (props: EventFormProps) => {
 
     try {
       if (props.mode === "create") await eventActions.addEvent(draftEvent);
-      if (props.mode === "edit")
+      if (props.mode === "edit") {
         await eventActions.editEvent(draftEvent, props.id);
+        console.log("here");
+      }
 
       useModalStore.getState().closeModal();
     } catch (err) {
@@ -128,8 +136,17 @@ export const EventForm = (props: EventFormProps) => {
 
       <CalendarOptions
         calendarsArray={calendars}
-        defaultValue={draftEvent.calendarName}
-        onSelect={(e) => updateFormField("calendarName", e)}
+        defaultValue={draftEvent.calendar.calendarName}
+        onCalendarSelect={(e) =>
+          setDraftEvent((prev) => ({
+            ...prev,
+            calendar: {
+              ...prev.calendar,
+              calendarName: e.value,
+              calendarId: e.value
+            }
+          }))
+        }
       />
       <Description
         value={draftEvent.description}

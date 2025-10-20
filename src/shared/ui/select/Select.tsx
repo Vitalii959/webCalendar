@@ -1,19 +1,30 @@
+import type React from "react";
 import "./select.css";
 
-export type SelectPropsTypes = {
-  options: {title: string; value: string}[];
-  onSelect: (value: string) => void;
+export type SelectOption = {
+  title: string;
+  value: string;
+};
+
+export type SelectProps = {
+  options: SelectOption[];
+  defaultValue?: string;
   title?: string;
-  value?: string;
+  onChangeOption: (option: SelectOption) => void;
 };
 
 export function Select({
   options,
-  onSelect,
   title,
+  defaultValue,
+  onChangeOption,
   ...restProps
-}: Omit<React.HTMLAttributes<HTMLSelectElement>, "onSelect"> &
-  SelectPropsTypes) {
+}: SelectProps) {
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value;
+    const selectedObject = options.find((o) => o.value === value);
+    if (selectedObject) onChangeOption(selectedObject);
+  };
   return (
     <>
       {options && (
@@ -22,14 +33,17 @@ export function Select({
 
           <select
             className='select__container'
+            defaultValue={defaultValue}
+            onChange={handleChange}
             {...restProps}
-            onChange={(e) => {
-              const value = e.target.value;
-              onSelect(value);
-            }}
           >
-            {options.map((item, index) => (
-              <option className='select__option' key={index} value={item.value}>
+            {options.map((item) => (
+              <option
+                className='select__option'
+                key={item.value}
+                value={item.value}
+                id={item.value}
+              >
                 {item.title}
               </option>
             ))}
