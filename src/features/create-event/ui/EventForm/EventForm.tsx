@@ -142,7 +142,7 @@ export const EventForm = (props: EventFormProps) => {
             ...prev,
             calendar: {
               ...prev.calendar,
-              calendarName: e.value,
+              calendarName: e.title,
               calendarId: e.value
             }
           }))
