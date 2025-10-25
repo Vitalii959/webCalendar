@@ -8,7 +8,7 @@ export type EventType = {
   };
   allDayChecked: boolean;
   repeatRule: string;
-  calendarName: string;
+  calendar: {calendarName: string; calendarId: string};
   description: string;
 };
 

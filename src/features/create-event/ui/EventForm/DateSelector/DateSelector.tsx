@@ -76,18 +76,22 @@ export const DateSelector = ({
           </div>
         </div>
         <Select
-          value={format(startTimeDefault, "Pp")}
+          defaultValue={format(startTimeDefault, "Pp")}
           options={startTimeArray}
           title='Start time'
-          onSelect={(e) => {
-            setEventDate({key: "startTime", value: new Date(e)});
+          onChangeOption={(opt: {title: string; value: string}) => {
+            const valueSelected = opt.value;
+            setEventDate({key: "startTime", value: new Date(valueSelected)});
           }}
         />
         {" - "}
         <Select
           options={endTimeArray}
           title={"End time"}
-          onSelect={(e) => setEventDate({key: "endTime", value: new Date(e)})}
+          onChangeOption={(e) => {
+            const valueSelected = e.value;
+            setEventDate({key: "endTime", value: new Date(valueSelected)});
+          }}
         />
       </div>
     </div>

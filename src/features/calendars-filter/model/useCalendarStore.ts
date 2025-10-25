@@ -21,10 +21,27 @@ const defaultCalendar = (userName?: string) => ({
   updatedAt: null
 });
 
+const LOCAL_SELECTED_CALENDARS_KEY = "selectedCalendars";
+const localStore = {
+  setItem: (key: string, value: string[]) => {
+    localStorage.setItem(key, JSON.stringify(value));
+  },
+  getItem: (key: string) => {
+    try {
+      const response = localStorage.getItem(key);
+
+      return response ? JSON.parse(response) : ["default-id"];
+    } catch {
+      return [];
+    }
+  }
+};
+
 export const useCalendarStore = create<CalendarStore>((set) => ({
   calendars: [],
-  selectedIds: [],
+  selectedIds: localStore.getItem(LOCAL_SELECTED_CALENDARS_KEY),
   calendarStatus: "idle",
+
   setCalendars: (calendarsArray) => {
     const userName = useUserStore.getState().user?.displayName ?? undefined;
     const defCalendar = defaultCalendar(userName);
@@ -34,11 +51,12 @@ export const useCalendarStore = create<CalendarStore>((set) => ({
   toggleSelectedIds: (id) => {
     set((state) => {
       const idExist = state.selectedIds.includes(id);
-      return {
-        selectedIds: idExist
-          ? state.selectedIds.filter((x) => x !== id)
-          : [...state.selectedIds, id]
-      };
+      const newSelectedIds = idExist
+        ? state.selectedIds.filter((x) => x !== id)
+        : [...state.selectedIds, id];
+
+      localStore.setItem(LOCAL_SELECTED_CALENDARS_KEY, newSelectedIds);
+      return {selectedIds: newSelectedIds};
     });
   },
   setCalendarStatus: (status) => set({calendarStatus: status})
