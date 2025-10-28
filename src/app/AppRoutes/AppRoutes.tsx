@@ -15,7 +15,10 @@ export const AppRoutes = () => {
         path='/'
         element={user ? <Navigate to='/calendar' /> : <Navigate to='/auth' />}
       />
-      <Route path='/calendar' element={<WebCalendar />} />
+      <Route
+        path='/calendar'
+        element={user ? <WebCalendar /> : <Navigate to='/auth' />}
+      />
       <Route path='/auth' element={<Auth />} />
     </Routes>
   );
