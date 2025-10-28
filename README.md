@@ -2,7 +2,7 @@
 
 ## React + TypeScript + Firebase app for creating and managing personal events with calendar filtering, authentication, and real-time data sync.
 
-[Live on Vercel](web-calendar-xi.vercel.app)
+[Live on Vercel](https://web-calendar-xi.vercel.app/auth)
 
 ![Web Calendar Demo](./public/assets/webCalendar.demo.gif) 
 
@@ -16,7 +16,7 @@
 ### Features
 - Create / Edit / Delete events
 - Filter by calendar
-- Presist selected calendars in localStorage
+- Persist selected calendars in localStorage
 - Real-time updates through Firestore
 - Google authentication
 - Feature-Sliced Design (FSD) structure
