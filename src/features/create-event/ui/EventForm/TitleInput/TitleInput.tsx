@@ -11,11 +11,11 @@ export type TitleInputProps = {
 
 export const TitleInput = ({value, error, onChange}: TitleInputProps) => {
   return (
-    <div className='flex'>
+    <div className='title'>
       <div className={styles.icon}>
         <Icons name='text' />
       </div>
-      <div className='flex-1'>
+      <div className='title__input-container'>
         <InputField
           title='Title'
           onChange={onChange}

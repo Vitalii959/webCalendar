@@ -1,1 +1,7 @@
-
+.calendarOptions {
+  display: flex;
+  flex-direction: row;
+}
+.calendarOptions__field {
+  width: 100%;
+}

@@ -1,3 +1,4 @@
+import "./calendarOptions.css";
 import {Icons} from "@/shared/ui/icons";
 import {Select} from "@/shared/ui/select";
 import styles from "../iconsLayout.module.css";
@@ -23,11 +24,11 @@ export const CalendarOptions = ({
     }));
   };
   return (
-    <div className='flex'>
+    <div className='calendarOptions'>
       <div className={styles.icon}>
         <Icons name='calendar' />
       </div>
-      <div className='flex-auto'>
+      <div className='calendarOptions__field'>
         <Select
           options={convertToSelectOptions(calendarsArray)}
           title='Calendar'

@@ -3,7 +3,11 @@
   position: relative;
   top: -6px;
 
+  text-align: center;
+
   font-size: 0.8rem;
+
+  cursor: default;
 }
 .calendarGrid__hour-container:first-child {
   visibility: hidden;

@@ -27,8 +27,8 @@ export const EventCard = ({
       }}
       onClick={onEventClick}
     >
-      <p className='text-xl text-left ml-1'>{title}</p>
-      <p className='text-xs text-left ml-1 pb-1'>{time}</p>
+      <p className='eventCard__title'>{title}</p>
+      <p className='eventCard__time'>{time}</p>
     </div>
   );
 };

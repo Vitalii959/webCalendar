@@ -46,7 +46,7 @@ export function Button({
               <Icons name={icon} color={iconColor || ""} />
             </div>
           )}
-          <div className='title'>{children}</div>
+          <div className='button-text'>{children}</div>
         </button>
       )}
     </>

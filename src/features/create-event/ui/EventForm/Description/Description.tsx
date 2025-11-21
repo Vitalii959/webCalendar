@@ -10,8 +10,8 @@ export type DescriptionProps = {
 
 export const Description = ({value, onChange}: DescriptionProps) => {
   return (
-    <div className='titleRow'>
-      <div className={`${styles.icon} p-0.5`}>
+    <div className='description'>
+      <div className={styles.icon}>
         <Icons name='text' />
       </div>
       <div className='titleInputWrapper'>

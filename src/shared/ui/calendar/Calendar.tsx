@@ -19,8 +19,7 @@ const WEEKDAYS = ["S", "M", "T", "W", "T", "F", "S"];
 export function Calendar({
   globalDate,
   onSelect,
-  daysDisabled,
-  ...restProps
+  daysDisabled
 }: Omit<React.HTMLAttributes<HTMLElement>, "onSelect"> & CalendarTypes) {
   const [localDate, setLocalDate] = useState(
     () => new Date(globalDate || new Date())
@@ -61,9 +60,9 @@ export function Calendar({
   const daysGrid = getGridOfDate(currentYear, currentMonth);
 
   return (
-    <div className='calendar' {...restProps}>
+    <div className='calendar'>
       <div className='calendar__header'>
-        <h2 className='calendar__header-title'>{`${currentMonthName}${" "}${currentYear}`}</h2>
+        <h3 className='calendar__header-title'>{`${currentMonthName}${" "}${currentYear}`}</h3>
         <div className='calendar__header-navigator-btn'>
           <div
             className='calendar__header-navigator-prev'

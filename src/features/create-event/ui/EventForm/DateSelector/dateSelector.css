@@ -1,8 +1,18 @@
-.dateSelector__wrapper {
+.dateSelector {
   display: flex;
   align-items: start;
+}
+.dateSelector__console {
+  display: flex;
+  flex-direction: row;
 
-  column-gap: 1rem;
+  align-items: center;
+
+  gap: 2rem;
+}
+
+.dateSelector__console-input {
+  position: relative;
 }
 .mini-calendar__wrapper {
   position: absolute;

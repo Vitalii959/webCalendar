@@ -1,11 +1,11 @@
-type CalendarHeaderProps = {weekArray: Date[]};
+type CalendarHeaderProps = {weekDayArray: Date[]};
 
 import "./CalendarHeader.css";
 
-export const CalendarHeader = ({weekArray}: CalendarHeaderProps) => {
+export const CalendarHeader = ({weekDayArray}: CalendarHeaderProps) => {
   return (
     <>
-      {weekArray.map((item) => (
+      {weekDayArray.map((item) => (
         <div className='calendarGrid__dayWrapper' key={item.toDateString()}>
           <div className='calendarGrid__dayContainer'>
             <div className='calendarGrid__day'>{item.getDate()}</div>

@@ -46,12 +46,12 @@ export const DateSelector = ({
   }, [miniCalendarVisibility]);
 
   return (
-    <div className='flex'>
+    <div className='dateSelector'>
       <div className={styles.icon}>
         <Icons name='clock' />
       </div>
-      <div className='flex gap-x-5'>
-        <div className='flex relative'>
+      <div className='dateSelector__console'>
+        <div className='dateSelector__console-input'>
           <InputField
             title='Date'
             type='text'

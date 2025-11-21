@@ -3,11 +3,13 @@ import type {DBEvent} from "@/entities/event/event.types";
 import {quarters, timePicker} from "../../helper/calendarGrin.hendler.";
 import {EventCard} from "@/entities/event/ui/event-card";
 import {differenceInMinutes, format} from "date-fns";
-import {useCalendarStore} from "@/features/calendars-filter/model/useCalendarStore";
+// import {useCalendarStore} from "@/features/calendars-filter/model/useCalendarStore";
+import type {CalendarTypes} from "@/entities/calendar";
 
 type Props = {
   currentDay: Date;
   events: DBEvent[];
+  calendars: CalendarTypes[];
   onEventClick?: (event: DBEvent) => void;
   onEmptyCellClick?: (date: Date) => void;
 };
@@ -15,43 +17,38 @@ type Props = {
 export const DayColumn = ({
   currentDay,
   events,
+  calendars,
   onEventClick,
   onEmptyCellClick
 }: Props) => {
-  const calendars = useCalendarStore((state) => state.calendars);
-  const selectedId = useCalendarStore((state) => state.selectedIds);
-
   return (
     <>
       <div className='calendarGrid__task-cell calendarTaskCell'>
         {events.map((event) => {
-          const getCalendarById = calendars.find(
-            (cal) => cal.id === event.calendar.calendarId
+          const eventId = event.calendar.calendarId;
+          const calendar = calendars.find(
+            (calendar) => calendar.id === eventId
           );
 
-          const isVisible = selectedId.includes(event.calendar.calendarId);
-
           return (
-            isVisible && (
-              <EventCard
-                key={event.id}
-                title={event.eventTitle}
-                time={`${format(event.eventDate.startTime, "p")} - ${format(
-                  event.eventDate.endTime,
-                  "p"
-                )}`}
-                height={differenceInMinutes(
-                  event.eventDate.endTime,
-                  event.eventDate.startTime
-                )}
-                top={differenceInMinutes(
-                  event.eventDate.startTime,
-                  event.eventDate.day
-                )}
-                color={getCalendarById?.color}
-                onEventClick={() => onEventClick?.(event)}
-              />
-            )
+            <EventCard
+              key={event.id}
+              title={event.eventTitle}
+              time={`${format(event.eventDate.startTime, "p")} - ${format(
+                event.eventDate.endTime,
+                "p"
+              )}`}
+              height={differenceInMinutes(
+                event.eventDate.endTime,
+                event.eventDate.startTime
+              )}
+              top={differenceInMinutes(
+                event.eventDate.startTime,
+                event.eventDate.day
+              )}
+              color={calendar?.color}
+              onEventClick={() => onEventClick?.(event)}
+            />
           );
         })}
 

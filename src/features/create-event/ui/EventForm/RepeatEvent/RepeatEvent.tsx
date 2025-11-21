@@ -22,10 +22,13 @@ export const RepeatEvent = ({
   options
 }: RepeatEventProps) => {
   return (
-    <div className='flex items-center'>
+    <div className='repeatEvent'>
       {/* style.icon for have same distande for empty div, do not remove */}
       <div className={styles.icon}></div>
-      <div className='mr-6' onClick={() => setChecked(!checked)}>
+      <div
+        className='repeatEvent__content'
+        onClick={() => setChecked(!checked)}
+      >
         <CheckBox
           checked={checked}
           title='Repeat'

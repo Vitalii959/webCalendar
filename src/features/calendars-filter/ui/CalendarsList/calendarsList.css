@@ -15,6 +15,10 @@
   display: flex;
   justify-content: space-between;
 }
+
+.myCalendar__header-title {
+  cursor: default;
+}
 .myCalendar__header-addNewCalendar {
   cursor: pointer;
 }

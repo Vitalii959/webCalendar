@@ -21,7 +21,9 @@
   border: 1px solid transparent;
   border-radius: 0.5rem;
 
-  cursor: pointer;
+  text-align: center;
+
+  cursor: default;
 
   transition: hover 0.2s ease-in-out, background-color 0.2s ease-in-out;
 }

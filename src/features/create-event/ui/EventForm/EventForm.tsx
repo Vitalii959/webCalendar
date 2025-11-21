@@ -153,7 +153,7 @@ export const EventForm = (props: EventFormProps) => {
         onChange={(e) => updateFormField("description", e)}
       />
 
-      <div className='w-30 h-10 self-end'>
+      <div className='eventForm__button'>
         <Button options='primary' onClick={handleSave}>
           Save
         </Button>

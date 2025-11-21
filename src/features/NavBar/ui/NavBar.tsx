@@ -39,7 +39,7 @@ export const NavBar = () => {
             {<CalendarVievToggle />}
           </div>
           <div
-            className='navbar__userInfo relative'
+            className='navbar__userInfo'
             onClick={() => setLogoutVisibility(true)}
             ref={ref}
           >
