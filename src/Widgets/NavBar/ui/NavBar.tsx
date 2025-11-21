@@ -46,7 +46,7 @@ export const NavBar = () => {
             <p className='username'>{userName}</p>
             <p className='userLogo'>{userLogo}</p>
             {logoutVisibility && (
-              <div className='navbar_logoutBtn w-full h-6 absolute top-8 '>
+              <div className='navbar_logoutBtn'>
                 <Button
                   style={{background: "white"}}
                   options='secondary'
