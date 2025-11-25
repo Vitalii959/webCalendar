@@ -1,9 +1,9 @@
 import {Routes, Route} from "react-router-dom";
 import {WebCalendarLayout} from "@/Pages/ui/webCalendarLayout";
 import {Auth} from "@/Pages/ui/auth";
-import {useUserStore} from "@/entities/user/model/zustand";
+import {useUserStore} from "@/entities/user/model/useUserStore";
 import {Navigate} from "react-router";
-import {WeekView} from "@/features/MainCalendar/calendar-view/ui/week-view";
+import {WeekDayView} from "@/features/calendar-screen/calendar-view/ui/week-day-view";
 
 export const AppRoutes = () => {
   const {isAuthenticated, user} = useUserStore();
@@ -29,8 +29,8 @@ export const AppRoutes = () => {
         element={user ? <WebCalendarLayout /> : <Navigate to='/auth' replace />}
       >
         <Route index element={<Navigate to='week' replace />} />
-        <Route path='day' element={<WeekView mode='day' />} />
-        <Route path='week' element={<WeekView mode='week' />} />
+        <Route path='day' element={<WeekDayView mode='day' />} />
+        <Route path='week' element={<WeekDayView mode='week' />} />
       </Route>
 
       <Route

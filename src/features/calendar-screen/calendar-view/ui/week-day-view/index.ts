@@ -1,0 +1,1 @@
+export {WeekDayView} from "./WeekDayView";

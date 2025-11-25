@@ -1,13 +1,13 @@
 import "./webCalendarLayout.css";
-import {NavBar} from "@/features/NavBar/ui/NavBar";
+import {NavHeader} from "@/Widgets/nav-header/ui/NavHeader";
 import {ModalContainer} from "@/shared/ui/modal";
-import {Sidebar} from "@/Widgets/Sidebar/ui/Sidebar";
+import {Sidebar} from "@/Widgets/sidebar/ui/Sidebar";
 
 import {ToastContainer} from "@/shared/ui/toast";
 import {Outlet} from "react-router";
-import {useCalendarLogic} from "@/features/MainCalendar/model/useCalendarLogic";
-import {useEventFilter} from "@/features/MainCalendar/model/useEventFilter";
-import {useCalendarData} from "@/features/MainCalendar/model/useCalendarData";
+import {useCalendarLogic} from "@/features/calendar-screen/model/useCalendarLogic";
+import {useEventFilter} from "@/features/calendar-screen/model/useEventFilter";
+import {useCalendarData} from "@/features/calendar-screen/model/useCalendarData";
 
 document.body.setAttribute("data-theme", "light-theme");
 
@@ -19,7 +19,7 @@ export const WebCalendarLayout = () => {
 
   return (
     <>
-      <NavBar />
+      <NavHeader />
       <section className='main__page container  '>
         <Sidebar />
         <Outlet
