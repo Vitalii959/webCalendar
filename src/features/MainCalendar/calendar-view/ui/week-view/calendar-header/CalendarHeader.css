@@ -2,10 +2,6 @@
   font-size: 1.2rem;
   border-bottom: 3px solid #cecccc;
 }
-.calendarGrid__header-days {
-  display: grid;
-  grid-template-columns: 70px repeat(7, auto);
-}
 
 .calendarGrid__dayWrapper {
   border-left: 1px solid #cecccc;

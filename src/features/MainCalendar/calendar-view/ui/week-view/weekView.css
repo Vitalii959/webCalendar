@@ -14,12 +14,6 @@
   height: calc(100vh - 90px);
 }
 
-.calendarGrid__header-days,
-.calendarGrid__main-container {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 70px repeat(7, 1fr);
-}
 .calendarGrid__header {
   font-size: 1.2rem;
   border-bottom: 3px solid #cecccc;
@@ -89,4 +83,17 @@
   border: 3px solid transparent;
   background-clip: content-box;
   cursor: pointer;
+}
+
+.calendarGrid__header-days,
+.calendarGrid__main-container {
+  width: 100%;
+  display: grid;
+}
+
+.week-view {
+  grid-template-columns: 70px repeat(7, 1fr);
+}
+.day-view {
+  grid-template-columns: 70px repeat(1, 1fr);
 }

@@ -1,10 +1,13 @@
 import "./dayColumn.css";
 import type {DBEvent} from "@/entities/event/event.types";
-import {quarters, timePicker} from "../../helper/calendarGrin.hendler.";
+
 import {EventCard} from "@/entities/event/ui/event-card";
 import {differenceInMinutes, format} from "date-fns";
-// import {useCalendarStore} from "@/features/calendars-filter/model/useCalendarStore";
 import type {CalendarTypes} from "@/entities/calendar";
+import {
+  quarters,
+  timePicker
+} from "@/features/MainCalendar/helper/calendarGrin.hendler.";
 
 type Props = {
   currentDay: Date;

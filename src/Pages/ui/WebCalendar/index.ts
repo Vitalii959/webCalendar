@@ -1,1 +1,0 @@
-export {WebCalendar} from "./WebCalendar";

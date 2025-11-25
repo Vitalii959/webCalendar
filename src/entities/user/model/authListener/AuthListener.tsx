@@ -13,8 +13,6 @@ export const AuthListener = () => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user ?? null);
       setAuthChecked();
-
-      if (user) navigate("/calendar");
     });
     return () => unsubscribe();
   }, [setUser, setAuthChecked, navigate]);

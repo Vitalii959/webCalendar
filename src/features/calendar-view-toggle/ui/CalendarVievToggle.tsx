@@ -1,7 +1,7 @@
 import "./calendarVievToggle.css";
 
 import {DropDown} from "@/shared/ui/dropDown";
-import {useViewToggle} from "../model/zustand";
+import {useLocation, useNavigate} from "react-router";
 
 const calendarGridOptions = [
   {title: "Day", value: "day"},
@@ -9,10 +9,18 @@ const calendarGridOptions = [
 ];
 
 export const CalendarVievToggle = () => {
-  const setCalendarView = useViewToggle((state) => state.setCalendarView);
+  const navigate = useNavigate();
+
+  const {pathname} = useLocation();
+  const currentView = pathname.endsWith("day") ? "day" : "week";
+
+  const setCalendarView = (view: string) => {
+    navigate(`/calendar/${view}`);
+  };
 
   return (
     <DropDown
+      defaultValue={currentView}
       options={calendarGridOptions}
       onOptionChange={(e) => setCalendarView(e)}
       style={{padding: ".2rem 1.4rem .2rem .8rem", borderRadius: ".6rem"}}

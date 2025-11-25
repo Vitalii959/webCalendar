@@ -5,7 +5,7 @@ import type {StatusType} from "@/shared/lib/status";
 
 type Store = {
   user: User | null;
-  isAuthChecked: boolean;
+  isAuthenticated: boolean;
   logoutStatus: StatusType;
   setUser: (userInfo: User | null) => void;
   setAuthChecked: () => void;
@@ -14,10 +14,10 @@ type Store = {
 
 export const useUserStore = create<Store>((set) => ({
   user: null,
-  isAuthChecked: false,
+  isAuthenticated: false,
   logoutStatus: "idle",
   setUser: (userInfo) => set({user: userInfo}),
-  setAuthChecked: () => set({isAuthChecked: true}),
+  setAuthChecked: () => set({isAuthenticated: true}),
   logout: async () => {
     set({logoutStatus: "loading"});
     try {
