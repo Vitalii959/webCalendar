@@ -4,12 +4,10 @@ import {Select} from "@/shared/ui/select";
 import styles from "../iconsLayout.module.css";
 import type {CalendarTypes} from "@/entities/calendar/calendar.types";
 
-import type {SelectOption} from "@/shared/ui/select/Select";
-
 export type CalendarOptionsProps = {
   calendarsArray: CalendarTypes[];
   defaultValue: string;
-  onCalendarSelect: (option: SelectOption) => void;
+  onCalendarSelect: (value: string) => void;
 };
 
 export const CalendarOptions = ({

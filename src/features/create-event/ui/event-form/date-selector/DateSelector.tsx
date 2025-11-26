@@ -1,49 +1,37 @@
+import "./dateSelector.css";
 import styles from "../iconsLayout.module.css";
 import {InputField} from "@/shared/ui/inputField";
 import {Select} from "@/shared/ui/select";
 import {Calendar} from "@/shared/ui/calendar";
 import {Icons} from "@/shared/ui/icons";
-import "./dateSelector.css";
 
 import {format} from "date-fns";
 
-import {useEffect, useRef, useState} from "react";
 import type {EventType} from "@/entities/event/event.types";
-
-type SetEventDate = (args: {
-  key: keyof EventType["eventDate"];
-  value: Date;
-}) => void;
+import {useDataSelector} from "@/features/create-event/model/useDataSelector";
 
 export type DateSelectorProps = {
   eventDate: EventType["eventDate"];
-  setEventDate: SetEventDate;
-  startTimeArray: {title: string; value: string}[];
-  endTimeArray: {title: string; value: string}[];
-  startTimeDefault: Date;
+  onDateChange: (DateType: EventType["eventDate"]) => void;
 };
 
-export const DateSelector = ({
-  eventDate,
-  setEventDate,
-  startTimeArray,
-  endTimeArray,
-  startTimeDefault
-}: DateSelectorProps) => {
-  const [miniCalendarVisibility, setMiniCalendarVisibility] = useState(false);
-  const miniCalendarRef = useRef<HTMLDivElement>(null);
-
-  const handleClickOutside = (e: MouseEvent) => {
-    if (!miniCalendarRef.current?.contains(e.target as Node)) {
-      setMiniCalendarVisibility(false);
-    }
-  };
-
-  useEffect(() => {
-    if (miniCalendarVisibility === true)
-      document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [miniCalendarVisibility]);
+export const DateSelector = ({eventDate, onDateChange}: DateSelectorProps) => {
+  const {
+    daySelected,
+    setDaySelected,
+    startTimeSelected,
+    setStartTimeSelected,
+    endTimeSelected,
+    setEndTimeSelected,
+    startTimeArray,
+    endTimeArray,
+    miniCalendarVisibility,
+    setMiniCalendarVisibility,
+    miniCalendarRef
+  } = useDataSelector({
+    eventDate,
+    onDateChange
+  });
 
   return (
     <div className='dateSelector'>
@@ -55,7 +43,7 @@ export const DateSelector = ({
           <InputField
             title='Date'
             type='text'
-            value={format(eventDate.day, "cccc, MMMM d")}
+            value={format(daySelected, "cccc, MMMM d")}
             onClick={() => setMiniCalendarVisibility(true)}
           />
           <div
@@ -66,9 +54,9 @@ export const DateSelector = ({
             ref={miniCalendarRef}
           >
             <Calendar
-              globalDate={eventDate.day}
+              globalDate={daySelected}
               onSelect={(e) => {
-                setEventDate({key: "day", value: e});
+                setDaySelected(e);
                 setMiniCalendarVisibility(false);
               }}
               className={miniCalendarVisibility ? "block" : "hidden"}
@@ -76,22 +64,19 @@ export const DateSelector = ({
           </div>
         </div>
         <Select
-          defaultValue={format(startTimeDefault, "Pp")}
           options={startTimeArray}
+          defaultValue={format(startTimeSelected, "Pp")}
           title='Start time'
-          onChangeOption={(opt: {title: string; value: string}) => {
-            const valueSelected = opt.value;
-            setEventDate({key: "startTime", value: new Date(valueSelected)});
+          onChangeOption={(e) => {
+            setStartTimeSelected(new Date(e));
           }}
         />
         {" - "}
         <Select
+          defaultValue={format(endTimeSelected, "Pp")}
           options={endTimeArray}
           title={"End time"}
-          onChangeOption={(e) => {
-            const valueSelected = e.value;
-            setEventDate({key: "endTime", value: new Date(valueSelected)});
-          }}
+          onChangeOption={(e) => setEndTimeSelected(new Date(e))}
         />
       </div>
     </div>

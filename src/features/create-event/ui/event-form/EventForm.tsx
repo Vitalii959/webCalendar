@@ -1,108 +1,23 @@
 import "./eventForm.css";
-import {useMemo, useState} from "react";
 import {DateSelector} from "./date-selector";
 import {TitleInput} from "./title-input";
 import {RepeatEvent} from "./repeat-event";
 import {CalendarOptions} from "./calendar-options";
 import {Description} from "./description";
 import {Button} from "@/shared/ui/Button";
+import {repeatOptions} from "../../model/helpers";
+import {useEventForm} from "../../model/useEventStore";
+import type {FormProps} from "../../model/formProps.types";
 
-import {hourRender, setSpecialDate} from "../../model/helpers";
-import {addMinutes} from "date-fns";
-import {useModalStore} from "@/shared/lib/modal-storage";
-import {useNavigate} from "react-router";
-
-import {baseForm, repeatOptions} from "../../model/helpers";
-
-import type {EventType} from "@/entities/event/event.types";
-import {selectedCalendarsStore} from "@/features/calendars-filter-panel/model/selectedCalendarsStore";
-import {eventActions} from "../../model/actions";
-import {useUserStore} from "@/entities/user/model/useUserStore";
-import {validateEvent} from "../../model/helpers/validateEvent";
-
-type CreateMode = {
-  mode: "create";
-  defaultValues?: never;
-  createOnSpecialDate?: Date;
-};
-type EditMode = {
-  mode: "edit";
-  defaultValues: EventType;
-  id: string;
-};
-
-type EventFormProps = CreateMode | EditMode;
-
-type FormErrors = {title?: string; calendarName?: string};
-
-export const EventForm = (props: EventFormProps) => {
-  const initialForm = () => {
-    if (props.mode === "edit") {
-      const form = {...baseForm, ...props.defaultValues};
-      return form;
-    }
-    if (props.mode === "create" && props.createOnSpecialDate) {
-      const specialDate = setSpecialDate(props.createOnSpecialDate);
-
-      return {
-        ...baseForm,
-        calendar: {
-          calendarName: calendars[0].title,
-          calendarId: calendars[0].id
-        },
-        ...specialDate
-      };
-    }
-    return baseForm;
-  };
-  const navigate = useNavigate();
-
-  const calendars = selectedCalendarsStore((s) => s.calendars);
-
-  const [errors, setErrors] = useState<FormErrors>();
-
-  const [draftEvent, setDraftEvent] = useState<EventType>(() => initialForm());
-
-  const startTimeArray = useMemo(() => {
-    return hourRender(draftEvent.eventDate.day);
-  }, [draftEvent.eventDate.day]);
-
-  const endTimeArray = useMemo(() => {
-    return hourRender(addMinutes(draftEvent.eventDate.startTime, 15));
-  }, [draftEvent.eventDate.startTime]);
-
-  const handleSave = async () => {
-    const user = useUserStore.getState().user?.uid;
-    if (!user) return navigate("/auth");
-
-    const {valid, errors} = validateEvent(draftEvent);
-
-    if (!valid) {
-      setErrors(errors);
-      return;
-    }
-
-    try {
-      if (props.mode === "create") await eventActions.addEvent(draftEvent);
-      if (props.mode === "edit") {
-        await eventActions.editEvent(draftEvent, props.id);
-        console.log("here");
-      }
-
-      useModalStore.getState().closeModal();
-    } catch (err) {
-      if (err instanceof Error && err.message === "Not authorized") {
-        navigate("/auth");
-        console.error("error", err);
-      }
-    }
-  };
-  const updateFormField = <K extends keyof EventType>(
-    key: K,
-    value: EventType[K]
-  ) => {
-    setDraftEvent((prev) => ({...prev, [key]: value}));
-  };
+export const EventForm = (props: FormProps) => {
+  const {
+    draftEvent,
+    setDraftEvent,
+    updateFormField,
+    errors,
+    handleSave,
+    calendars
+  } = useEventForm(props);
 
   return (
     <div className='event__wrapper'>
@@ -113,18 +28,7 @@ export const EventForm = (props: EventFormProps) => {
       />
       <DateSelector
         eventDate={draftEvent.eventDate}
-        setEventDate={({key, value}) =>
-          setDraftEvent((prev) => ({
-            ...prev,
-            eventDate: {
-              ...prev.eventDate,
-              [key]: value
-            }
-          }))
-        }
-        startTimeArray={startTimeArray}
-        endTimeArray={endTimeArray}
-        startTimeDefault={draftEvent.eventDate.startTime}
+        onDateChange={(e) => updateFormField("eventDate", e)}
       />
       <RepeatEvent
         checked={draftEvent.allDayChecked}
@@ -142,8 +46,8 @@ export const EventForm = (props: EventFormProps) => {
             ...prev,
             calendar: {
               ...prev.calendar,
-              calendarName: e.title,
-              calendarId: e.value
+              calendarName: e,
+              calendarId: e
             }
           }))
         }

@@ -41,7 +41,7 @@ export const RepeatEvent = ({
           options={options}
           defaultValue={defaultValue}
           onChangeOption={(e) => {
-            const valueSelected = e.value;
+            const valueSelected = e;
             onSelect(valueSelected);
           }}
         />

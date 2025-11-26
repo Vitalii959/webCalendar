@@ -1,5 +1,3 @@
-import {addMinutes, startOfDay} from "date-fns";
-import {roundUpToNextQuarter} from "./timeUtils";
 import type {EventType} from "@/entities/event/event.types";
 
 export const repeatOptions = [
@@ -11,9 +9,9 @@ export const repeatOptions = [
 export const baseForm: EventType = {
   eventTitle: "",
   eventDate: {
-    day: startOfDay(new Date()),
-    startTime: roundUpToNextQuarter(new Date()),
-    endTime: addMinutes(roundUpToNextQuarter(new Date()), 15)
+    day: new Date(),
+    startTime: new Date(),
+    endTime: new Date()
   },
   allDayChecked: false,
   repeatRule: "",
