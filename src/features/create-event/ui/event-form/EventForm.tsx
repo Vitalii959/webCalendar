@@ -18,7 +18,6 @@ export const EventForm = (props: FormProps) => {
     handleSave,
     calendars
   } = useEventForm(props);
-  console.log(draftEvent);
 
   return (
     <div className='event__wrapper'>

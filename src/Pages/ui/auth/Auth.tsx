@@ -1,7 +1,11 @@
 import "./auth.css";
 import {auth} from "@/shared/lib/firebase/config";
 import {Button} from "@/shared/ui/Button";
-import {GoogleAuthProvider, signInWithPopup} from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInAnonymously
+} from "firebase/auth";
 import {useNavigate} from "react-router";
 
 import loginImg from "@/assets/login-img.png";
@@ -9,14 +13,23 @@ import loginImg from "@/assets/login-img.png";
 export const Auth = () => {
   const navigate = useNavigate();
 
-  const handleLoggin = async () => {
+  const handleLoggin = async (method: "google" | "guest") => {
     const provider = new GoogleAuthProvider();
-    try {
-      const result = await signInWithPopup(auth, provider);
-      if (result.user) navigate("/calendar");
-    } catch (error) {
-      throw new Error("can not login");
-      console.error(error);
+    if (method === "guest") {
+      try {
+        const result = await signInAnonymously(auth);
+        if (result.user) navigate("/calendar");
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      try {
+        const result = await signInWithPopup(auth, provider);
+        if (result.user) navigate("/calendar");
+      } catch (error) {
+        throw new Error("can not login");
+        console.error(error);
+      }
     }
   };
 
@@ -29,8 +42,17 @@ export const Auth = () => {
             React • TypeScript • Firebase • Zustand
           </h2>
           <div className='login-btn'>
-            <Button options='secondary' onClick={handleLoggin} icon='google'>
+            <Button
+              options='secondary'
+              onClick={() => handleLoggin("google")}
+              icon='google'
+            >
               Login with google
+            </Button>
+          </div>
+          <div className='login-btn'>
+            <Button options='secondary' onClick={() => handleLoggin("guest")}>
+              Login as Guest
             </Button>
           </div>
           <div className='login-links'>
