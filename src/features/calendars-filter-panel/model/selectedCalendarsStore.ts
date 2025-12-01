@@ -50,10 +50,14 @@ export const selectedCalendarsStore = create<CalendarStore>((set) => ({
 
   toggleSelectedIds: (id) => {
     set((state) => {
-      const idExist = state.selectedIds.includes(id);
-      const newSelectedIds = idExist
-        ? state.selectedIds.filter((x) => x !== id)
-        : [...state.selectedIds, id];
+      const currentCalendars = state.calendars.map((calendar) => calendar.id);
+      const newSelectedIdsArray = state.selectedIds.filter((item) =>
+        currentCalendars.includes(item)
+      );
+
+      const newSelectedIds = newSelectedIdsArray.includes(id)
+        ? newSelectedIdsArray.filter((item) => item !== id)
+        : [...newSelectedIdsArray, id];
 
       localStore.setItem(LOCAL_SELECTED_CALENDARS_KEY, newSelectedIds);
       return {selectedIds: newSelectedIds};
