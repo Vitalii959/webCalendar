@@ -1,6 +1,6 @@
 import {useEffect, useMemo, useRef, useState} from "react";
-import {hourRender} from "./helpers";
-import {addMinutes, isBefore} from "date-fns";
+import {hourRender, roundUpToNextQuarter} from "./helpers";
+import {addMinutes, isBefore, startOfDay} from "date-fns";
 import type {EventType} from "@/entities/event/event.types";
 import {useClickOutside} from "@/shared/hooks";
 
@@ -10,11 +10,13 @@ type Props = {
 };
 
 export const useDataSelector = ({eventDate, onDateChange}: Props) => {
-  const [daySelected, setDaySelected] = useState(eventDate.day);
+  const [daySelected, setDaySelected] = useState(startOfDay(eventDate.day));
   const [startTimeSelected, setStartTimeSelected] = useState(
-    eventDate.startTime
+    roundUpToNextQuarter(eventDate.startTime)
   );
-  const [endTimeSelected, setEndTimeSelected] = useState(eventDate.endTime);
+  const [endTimeSelected, setEndTimeSelected] = useState(
+    roundUpToNextQuarter(eventDate.endTime)
+  );
 
   const [miniCalendarVisibility, setMiniCalendarVisibility] = useState(false);
   const miniCalendarRef = useRef<HTMLDivElement>(null);

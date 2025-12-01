@@ -51,8 +51,6 @@ export const useEventForm = (props: FormProps) => {
   return {
     draftEvent,
     setDraftEvent,
-    // startTimeArray,
-    // endTimeArray,
     errors,
     setErrors,
     handleSave,

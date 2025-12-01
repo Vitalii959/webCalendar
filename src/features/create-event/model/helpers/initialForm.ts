@@ -4,6 +4,13 @@ import {baseForm} from "./baseForm";
 import {setSpecialDate} from "./timeUtils";
 
 export const initialForm = (props: FormProps, calendars: CalendarTypes[]) => {
+  const calendarss = {
+    calendar: {
+      calendarName: calendars[0].title,
+      calendarId: calendars[0].id
+    }
+  };
+
   const currentDate = new Date();
   if (props.mode === "edit") {
     const form = {...props.defaultValues};
@@ -14,16 +21,14 @@ export const initialForm = (props: FormProps, calendars: CalendarTypes[]) => {
 
     return {
       ...baseForm,
-      calendar: {
-        calendarName: calendars[0].title,
-        calendarId: calendars[0].id
-      },
+      ...calendarss,
       ...specialDate
     };
   }
 
   const onCurrentDate = {
     ...baseForm,
+    ...calendarss,
     eventDate: {
       ...baseForm.eventDate,
       day: new Date(currentDate),

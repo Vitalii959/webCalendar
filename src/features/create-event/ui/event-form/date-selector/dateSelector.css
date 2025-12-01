@@ -13,6 +13,8 @@
 
 .dateSelector__console-input {
   position: relative;
+
+  width: 300px;
 }
 .mini-calendar__wrapper {
   position: absolute;
