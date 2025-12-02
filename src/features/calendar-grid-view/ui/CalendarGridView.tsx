@@ -1,4 +1,4 @@
-import "./CalendarGridView.css";
+import "./calendarGridView.css";
 
 import {DropDown} from "@/shared/ui/dropDown";
 import {useLocation, useNavigate} from "react-router";

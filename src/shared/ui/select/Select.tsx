@@ -32,7 +32,9 @@ export function Select({
           <select
             className='select__container'
             onChange={handleChange}
-            //@ts-expect-error 'value' is a required prop, but we can fix it later'
+            //vercel don't see a problem below
+            // eslint-disable-next-line
+            //@ts-ignore
             value={defaultValue}
           >
             {options.map((item) => (

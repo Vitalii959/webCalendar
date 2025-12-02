@@ -1,4 +1,4 @@
-import "./NavHeader.css";
+import "./navHeader.css";
 
 import NavLogo from "@/../public/assets/Logo.png";
 
