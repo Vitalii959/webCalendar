@@ -1,25 +1,44 @@
-import {Routes, Route} from "react-router";
-import {WebCalendar} from "@/Pages/ui/WebCalendar";
+import {Routes, Route} from "react-router-dom";
+import {WebCalendarLayout} from "@/Pages/ui/webCalendarLayout";
 import {Auth} from "@/Pages/ui/auth";
-import {useUserStore} from "@/entities/user/model/zustand";
+import {useUserStore} from "@/entities/user/model/useUserStore";
 import {Navigate} from "react-router";
+import {WeekDayView} from "@/features/calendar-screen/calendar-view/ui/week-day-view";
 
 export const AppRoutes = () => {
-  const {user, isAuthChecked} = useUserStore();
+  const {isAuthenticated, user} = useUserStore();
 
-  if (!isAuthChecked) return <h1>Loading...</h1>;
-
+  if (!isAuthenticated) return <h1>Loading...</h1>;
   return (
     <Routes>
       <Route
         path='/'
-        element={user ? <Navigate to='/calendar' /> : <Navigate to='/auth' />}
+        element={
+          user ? (
+            <Navigate to='/calendar' replace />
+          ) : (
+            <Navigate to='/auth' replace />
+          )
+        }
       />
+
+      <Route path='/auth' element={<Auth />} />
+
       <Route
         path='/calendar'
-        element={user ? <WebCalendar /> : <Navigate to='/auth' />}
+        element={user ? <WebCalendarLayout /> : <Navigate to='/auth' replace />}
+      >
+        <Route index element={<Navigate to='week' replace />} />
+        <Route path='day' element={<WeekDayView mode='day' />} />
+        <Route path='week' element={<WeekDayView mode='week' />} />
+      </Route>
+
+      <Route
+        path='*'
+        element={
+          user ? <Navigate to='/calendar/week' /> : <Navigate to='/auth' />
+        }
       />
-      <Route path='/auth' element={<Auth />} />
     </Routes>
   );
 };

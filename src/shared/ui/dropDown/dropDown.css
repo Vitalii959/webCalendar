@@ -4,6 +4,8 @@
   height: fit-content;
   display: grid;
   place-items: center;
+
+  cursor: pointer;
 }
 .dropdown-menu__select {
   width: 100%;

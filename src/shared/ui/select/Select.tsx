@@ -8,22 +8,20 @@ export type SelectOption = {
 
 export type SelectProps = {
   options: SelectOption[];
-  defaultValue?: string;
+  defaultValue: string;
   title?: string;
-  onChangeOption: (option: SelectOption) => void;
+  onChangeOption: (value: string) => void;
 };
 
 export function Select({
   options,
   title,
   defaultValue,
-  onChangeOption,
-  ...restProps
+  onChangeOption
 }: SelectProps) {
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
-    const selectedObject = options.find((o) => o.value === value);
-    if (selectedObject) onChangeOption(selectedObject);
+    if (value) onChangeOption(value);
   };
   return (
     <>
@@ -33,9 +31,9 @@ export function Select({
 
           <select
             className='select__container'
-            defaultValue={defaultValue}
             onChange={handleChange}
-            {...restProps}
+            //@ts-expect-error 'value' is a required prop, but we can fix it later'
+            value={defaultValue}
           >
             {options.map((item) => (
               <option

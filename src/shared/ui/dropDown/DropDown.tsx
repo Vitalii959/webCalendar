@@ -1,9 +1,9 @@
-import type {CalendarViewToggle} from "@/features/calendar-view-toggle/model/types";
 import "./dropDown.css";
+import type {calendarGridView} from "@/features/calendar-grid-view/model/calendarGridView.types";
 
 type Props = {
   options: {title: string; value: string}[];
-  onOptionChange: (view: CalendarViewToggle) => void;
+  onOptionChange: (view: calendarGridView) => void;
 } & React.SelectHTMLAttributes<HTMLSelectElement>;
 
 export function DropDown({options, onOptionChange, ...restProps}: Props) {
@@ -13,9 +13,7 @@ export function DropDown({options, onOptionChange, ...restProps}: Props) {
         <div className='dropdown-menu'>
           <select
             className='dropdown-menu__select'
-            onChange={(e) =>
-              onOptionChange(e.target.value as CalendarViewToggle)
-            }
+            onChange={(e) => onOptionChange(e.target.value as calendarGridView)}
             defaultValue={"week"}
             {...restProps}
           >

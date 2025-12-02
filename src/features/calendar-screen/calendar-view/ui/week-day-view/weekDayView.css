@@ -1,0 +1,99 @@
+.calendarGrid__scrollWrapper {
+  padding-right: 15px;
+  overflow-x: auto;
+}
+.calendarGrid__container {
+  display: flex;
+  flex-direction: column;
+
+  background-color: white;
+
+  border-radius: 0.5rem;
+
+  min-width: 400px;
+  height: calc(100vh - 90px);
+}
+
+.calendarGrid__header {
+  font-size: 1.2rem;
+  border-bottom: 3px solid #cecccc;
+}
+
+.calendarGrid__hours-sidePanel {
+  display: grid;
+  grid-template-rows: repeat(24, 60px);
+}
+
+.calendarGrid__main {
+  height: calc(100vh - 120px);
+  overflow-y: scroll;
+  margin-right: -12px;
+}
+
+.calendarGrid__dayWrapper {
+  border-left: 1px solid #cecccc;
+}
+
+.calendarGrid__dayContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.1rem;
+
+  position: relative;
+  margin: 0.2rem 0.4rem;
+  padding: 0.2rem 0.4rem;
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+
+  cursor: pointer;
+
+  transition: hover 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+.calendarGrid__dayContainer:hover {
+  background-color: #e8f5e9;
+}
+
+.calendarGrid__day {
+  font-weight: 500;
+}
+
+.calendarGrid__dayName {
+  font-size: 0.7rem;
+}
+
+.calendarGrid__task-cell {
+  border-left: 1px solid #cecccc;
+  border-top: 1px solid #cecccc;
+}
+
+.calendarGrid__main::-webkit-scrollbar,
+.calendarGrid__scrollWrapper::-webkit-scrollbar {
+  width: 12px;
+}
+
+.calendarGrid__main::-webkit-scrollbar-track,
+.calendarGrid__scrollWrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.calendarGrid__main::-webkit-scrollbar-thumb,
+.calendarGrid__scrollWrapper::-webkit-scrollbar-thumb {
+  background-color: #999;
+  border-radius: 6px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+  cursor: pointer;
+}
+
+.calendarGrid__header-days,
+.calendarGrid__main-container {
+  width: 100%;
+  display: grid;
+}
+
+.week-view {
+  grid-template-columns: 70px repeat(7, 1fr);
+}
+.day-view {
+  grid-template-columns: 70px repeat(1, 1fr);
+}

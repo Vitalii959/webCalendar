@@ -1,8 +1,6 @@
-import "./App.css";
-
 import {BrowserRouter} from "react-router";
 import {AppRoutes} from "./AppRoutes";
-import {AuthListener} from "@/entities/user/model/authListener";
+import {AuthListener} from "@/entities/user/model/AuthListener";
 
 function App() {
   return (

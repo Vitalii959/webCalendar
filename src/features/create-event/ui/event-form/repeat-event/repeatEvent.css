@@ -1,0 +1,8 @@
+.repeatEvent {
+  display: flex;
+  align-items: center;
+}
+
+.repeatEvent__content {
+  margin-right: 1rem;
+}

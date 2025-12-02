@@ -2,7 +2,7 @@
   position: absolute;
   background-color: #eec04c4d;
   width: 90%;
-  overflow: hidden;
+  /* overflow: hidden; */
 
   display: flex;
   flex-direction: column;
@@ -10,4 +10,14 @@
 
   /* border-left: 4px solid; */
   border-radius: 0.3rem;
+}
+
+.eventCard__title {
+  width: 100%;
+  font-size: 1rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.eventCard__time {
+  font-size: 0.6rem;
 }

@@ -1,4 +1,4 @@
-import {useUserStore} from "@/entities/user/model/zustand";
+import {useUserStore} from "@/entities/user/model/useUserStore";
 
 export const requireUid = () => {
   const uid = useUserStore.getState().user?.uid;

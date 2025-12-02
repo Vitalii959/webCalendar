@@ -1,0 +1,21 @@
+.event__wrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+
+  padding: 1rem 0;
+
+  color: #5b5f6e;
+}
+
+.two-columns {
+  display: grid;
+  grid-template-columns: 14px 1fr;
+  column-gap: 1rem;
+}
+
+.eventForm__button {
+  display: flex;
+  align-self: end;
+  width: 200px;
+}

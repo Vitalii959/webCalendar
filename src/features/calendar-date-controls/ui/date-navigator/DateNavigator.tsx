@@ -1,0 +1,41 @@
+import "./dateNavigator.css";
+import {Icons} from "@/shared/ui/icons";
+import {currentDateStore} from "@/features/calendar-date-controls/model";
+import {format, addWeeks} from "date-fns";
+import {Button} from "@/shared/ui/Button";
+
+export const DateNavigator = () => {
+  const {currentDate} = currentDateStore();
+  const {setCurrentDate} = currentDateStore();
+
+  return (
+    <div className='calendar__navigation'>
+      <div className='calendar__navigation-today-btn'>
+        <Button options='primary' onClick={() => setCurrentDate(new Date())}>
+          Today
+        </Button>
+      </div>
+      <div className='calendar__navigation__btn-wrapper'>
+        <div className='calendar__navigation-prevBtn'>
+          <Button
+            options='secondary'
+            onClick={() => setCurrentDate(addWeeks(currentDate, -1))}
+          >
+            {<Icons name='arrowLeft' />}
+          </Button>
+        </div>
+        <div className='calendar__navigation-nextBtn'>
+          <Button
+            options='secondary'
+            onClick={() => setCurrentDate(addWeeks(currentDate, +1))}
+          >
+            {<Icons name='arrowRight' />}
+          </Button>
+        </div>
+        <div className='calendar__navigation-currentMonthDisplay'>
+          {format(currentDate, "MMMM y")}
+        </div>
+      </div>
+    </div>
+  );
+};

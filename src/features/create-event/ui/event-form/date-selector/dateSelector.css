@@ -1,0 +1,27 @@
+.dateSelector {
+  display: flex;
+  align-items: start;
+}
+.dateSelector__console {
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+
+  gap: 2rem;
+}
+
+.dateSelector__console-input {
+  position: relative;
+
+  width: 300px;
+}
+.mini-calendar__wrapper {
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #00000030;
+  z-index: 100;
+  padding: 1rem;
+  border-radius: 10px;
+  top: 4rem;
+}

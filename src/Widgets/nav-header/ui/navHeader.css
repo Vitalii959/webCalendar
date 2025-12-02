@@ -1,0 +1,64 @@
+.navbar__background-color {
+  background-color: white;
+}
+.navbar {
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+
+  padding: 0.5rem 0;
+}
+
+.navbar-leftSide {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  column-gap: 1rem;
+
+  min-width: fit-content;
+}
+
+.calendarNavigation__wrapper {
+  height: 2rem;
+}
+
+.navbar-rightSide {
+  display: flex;
+  align-items: center;
+  column-gap: 2rem;
+
+  min-width: fit-content;
+}
+
+.navbar__calendarGridOptions {
+  min-width: fit-content;
+}
+.navbar__userInfo {
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+
+  position: relative;
+
+  cursor: pointer;
+}
+
+.userLogo {
+  background-color: brown;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  color: white;
+
+  border-radius: 50%;
+}
+.navbar_logoutBtn {
+  position: absolute;
+  top: 30px;
+  left: 0;
+}
+.navbar_logoutBtn button {
+  width: 110px;
+}

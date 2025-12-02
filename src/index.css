@@ -1,4 +1,4 @@
-@import "tailwindcss";
+/* @import "tailwindcss"; */
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -13,6 +13,68 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Reset box sizing and remove default paddings */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove default link styling */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Make images responsive */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for form elements */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove list bullets */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Set base body styles */
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Buttons default reset */
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Headings consistent line-height */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  line-height: 1.2;
 }
 
 :root {
@@ -116,4 +178,10 @@
   --toast-background: #f4f4f4;
   --toast-text: black;
   --toast-dropshadow: #00000027;
+}
+body {
+  margin: 0 auto;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow: hidden;
 }
