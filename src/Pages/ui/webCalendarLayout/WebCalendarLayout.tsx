@@ -1,7 +1,7 @@
 import "./webCalendarLayout.css";
 import {NavHeader} from "@/Widgets/nav-header/ui/NavHeader";
 import {ModalContainer} from "@/shared/ui/modal";
-import {Sidebar} from "@/Widgets/sidebar/ui/Sidebar";
+import {Sidebar} from "@/Widgets/sidebar/ui";
 
 import {ToastContainer} from "@/shared/ui/toast";
 import {Outlet} from "react-router";

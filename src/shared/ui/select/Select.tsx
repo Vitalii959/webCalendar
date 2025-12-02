@@ -32,7 +32,8 @@ export function Select({
           <select
             className='select__container'
             onChange={handleChange}
-            //@ts-expect-error 'value' is a required prop, but we can fix it later'
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-expect-error
             value={defaultValue}
           >
             {options.map((item) => (
