@@ -44,6 +44,11 @@ textarea,
 select {
   font: inherit;
 }
+select {
+  appearance: none;
+  background-color: white;
+  color: black;
+}
 
 /* Remove list bullets */
 ul,
