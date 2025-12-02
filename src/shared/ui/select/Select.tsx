@@ -32,8 +32,8 @@ export function Select({
           <select
             className='select__container'
             onChange={handleChange}
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-expect-error
+            //vercel don't see a problem below
+            //@ts-ignore
             value={defaultValue}
           >
             {options.map((item) => (
