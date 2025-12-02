@@ -33,6 +33,7 @@ export function Select({
             className='select__container'
             onChange={handleChange}
             //vercel don't see a problem below
+            // eslint-disable-next-line
             //@ts-ignore
             value={defaultValue}
           >
